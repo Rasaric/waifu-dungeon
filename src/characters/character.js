@@ -33,7 +33,6 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
 		super(scene, x, y, texture)
 		this.scene = scene
 
-
 		//sprite attributes*********************************************************
 		this.displayWidth= 64;
 		this.displayHeight= 64;
