@@ -53,6 +53,7 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
 		this.damage = 4;
 		this.weapon = "bare hands";
 		this.armor = 1;
+		this.cooldown = false;
 
 		// get health() 	{
 		// 	return this.health
@@ -113,7 +114,12 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
 		//interaction***************************************************************
 		//attack
 		if(Phaser.Input.Keyboard.JustDown(space)){
-			setInterval(this.onFight('you'), 1000);
+			if (this.cooldown==true) {return;
+			}	else {
+				this.cooldown = true;
+				this.onFight('you');
+				setTimeout(() => {this.cooldown=false},500)
+			}
 		}
 		//open inventory
 		if(Phaser.Input.Keyboard.JustDown(keys.E)){
