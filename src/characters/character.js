@@ -52,6 +52,7 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
 		this.damage = 4;
 		this.weapon = "bare hands";
 		this.armor = 1;
+		this.armorName = "Nude Body"
 		this.cooldown = false;
 
 		// get health() 	{
@@ -67,33 +68,6 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
 
 	/*character Methods**********************************************************/
 
-	//Combat----------------------------------------------------------------------
-	//recieve damage
-	// handleDamage(dir: Phaser.Math.Vector2) 	{
-	// 	if (this._health <= 0) {
-	// 		return
-	// 	}
-	//
-	// 	if (this.healthState === HealthState.DAMAGE) {
-	// 		return
-	// 	}
-	//
-	// 	--this._health
-	//
-	// 	if (this._health <= 0) {
-	// 		// TODO: die
-	// 		this.healthState = HealthState.DEAD
-	// 		this.anims.play('character-faint')
-	// 		this.setVelocity(0, 0)
-	// 	}	else {
-	// 		this.setVelocity(dir.x, dir.y)
-	//
-	// 		this.setTint(0xff0000)
-	//
-	// 		this.healthState = HealthState.DAMAGE
-	// 		this.damageTime = 0
-	// 	}
-	// }
 	//controls--------------------------------------------------------------------
 	controls(keys, space){
 		this.setVelocity(0);
@@ -110,7 +84,7 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
 			this.setVelocityY(160);
 		}
 
-		//interaction***************************************************************
+		//interaction---------------------------------------------------------------
 		//attack
 		if(Phaser.Input.Keyboard.JustDown(space)){
 			if (this.cooldown==true) {return;
@@ -127,22 +101,26 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
 	}
 	//attack----------------------------------------------------------------------
 
-	onFight(target){
+	onFight(target, player){
+		target.setVelocityY(1000);
+		setTimeout(()=>target.setVelocityX(0),100)
 		let atkRoll = Math.floor(Math.random()*10)+this.combat;
 		let defRoll = Math.floor(Math.random()*10)+target.dodge;
+		let damageRoll = Math.floor(Math.random()*10)+this.damage;
 
 		console.log(`attack ${atkRoll}, defense ${defRoll}`)
 
 		if (atkRoll>defRoll) {
-			damageDealt = target.armor-this.combat;
+			let damageDealt = damageRoll-target.armor;
+			console.log('damage: ' + damageDealt);
 			if (damageDealt<=0) {console.log(`${this.name} barely glanced ${target.name}'s ${target.armor}`);}
 			else{
-				target.hp = target.hp-(target.armor-this.combat);
-				if(target.hp<=0){
+				target.health = target.health-damageDealt;
+				if(target.health<=0){
 					console.log(`${this.name} killed ${target.name} with her ${this.weapon}!`);
 					target.isAlive=false;
 				} else {
-					console.log(`${this.name} attacked ${target.name} for ${this.damage} damage with their ${this.weapon}, ${target.name} has ${target.hp}hp left`);
+					console.log(`${this.name} attacked ${target.name} for ${damageDealt} damage with their ${this.weapon}, ${target.name} has ${target.health}hp left`);
 				}
 			}
 		} else {

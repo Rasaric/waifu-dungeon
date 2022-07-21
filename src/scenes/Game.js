@@ -30,21 +30,28 @@ export default class Game extends Phaser.Scene {
     //import player sprite------------------------------------------------------
     this.player = new Character(this, 600, 430, 'player');
 
+    //single grunt for testing
+    this.grunt = new Grunt(this, 600, 330, 'grunt')
+
     //grunts--------------------------------------------------------------------
-    this.grunt = this.physics.add.group({
-      classType: Grunt,
-      key: 'grunt',
-      repeat: 5,
-      setXY: { x: 64, y: 64, stepX: 70, stepY: 30 }
-    });
+    // this.grunt = this.physics.add.group({
+    //   classType: Grunt,
+    //   key: 'grunt',
+    //   repeat: 5,
+    //   setXY: { x: 64, y: 64, stepX: 70, stepY: 30 },
+    //   setDisplaySize: {width: this.displayWidth, height: this.displayHeight}
+    // });
 
     // //set camera to follow character
     this.cameras.main.startFollow(this.player, true);
 
+    //collisions----------------------------------------------------------------
+    this.physics.add.overlap(this.player, this.grunt, this.grunt.onFight, null, this.grunt);
   }
 
   //update game state*************************************************************
-  update(keys) {
+  update() {
     this.player.controls(this.keys, this.spacebar);
+
   }
 }

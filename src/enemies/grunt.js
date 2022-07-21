@@ -14,7 +14,10 @@ export default class Grunt extends Phaser.Physics.Arcade.Sprite {
 		this.scene = scene
 
 		//sprite attributes*********************************************************
+		this.displayWidth= 64;
+		this.displayHeight= 64;
 		this.scene.physics.world.enable(this);
+    //this.scene.physics.add.collider(this, scene.player)
     this.setImmovable(false);
     this.setCollideWorldBounds(true);
     scene.add.existing(this);
@@ -26,31 +29,48 @@ export default class Grunt extends Phaser.Physics.Arcade.Sprite {
 		this.health = 1;
 		this.combat = 1;
 		this.dodge = 1;
-		this.damage = 2;
+		this.damage = 7;
 		this.weapon = "Rusted Sword";
 		this.armor = 1;
+		this.armorName = "tattered robes"
 		this.cooldown = false;
 	}
 
 	/*character Methods**********************************************************/
 
 	//attack----------------------------------------------------------------------
-	onFight(target){
+	onCollide(){
+		console.log('boop');
+	}
+	onFight(target, grunt){
+		//prevent grunt from attack spamming
+		if (this.cooldown==true) {return;
+		}	else {
+			this.cooldown = true;
+			setTimeout(() => {this.cooldown=false},1000)
+		}
+		//knockback**NOT WORKING
+		target.setVelocityY(-1000);
+		setTimeout(()=>target.setVelocityY(0),300);
+
+		//roll for atack, defense and damage
 		let atkRoll = Math.floor(Math.random()*10)+this.combat;
 		let defRoll = Math.floor(Math.random()*10)+target.dodge;
-
+		let damageRoll = Math.floor(Math.random()*10)+this.damage;
 		console.log(`attack ${atkRoll}, defense ${defRoll}`)
 
+		//check values and resolve combat outcome
 		if (atkRoll>defRoll) {
-			damageDealt = target.armor-this.combat;
-			if (damageDealt<=0) {console.log(`${this.name} barely glanced ${target.name}'s ${target.armor}`);}
+			let damageDealt = damageRoll-target.armor;
+			console.log('damage: ' + damageDealt);
+			if (damageDealt<=0) {console.log(`${this.name} barely glanced ${target.name}'s ${target.armorName}`);}
 			else{
-				target.hp = target.hp-(target.armor-this.combat);
-				if(target.hp<=0){
+				target.health = target.health-damageDealt;
+				if(target.health<=0){
 					console.log(`${this.name} killed ${target.name} with her ${this.weapon}!`);
 					target.isAlive=false;
 				} else {
-					console.log(`${this.name} attacked ${target.name} for ${this.damage} damage with their ${this.weapon}, ${target.name} has ${target.hp}hp left`);
+					console.log(`${this.name} attacked ${target.name} for ${damageDealt} damage with their ${this.weapon}, ${target.name} has ${target.health}hp left`);
 				}
 			}
 		} else {
