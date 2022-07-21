@@ -27,9 +27,9 @@ export default class Grunt extends Phaser.Physics.Arcade.Sprite {
 		this.name= 'Grunt';
 		//stats
 		this.health = 1;
-		this.combat = 1;
+		this.combat = 5;
 		this.dodge = 1;
-		this.damage = 7;
+		this.damage = 8;
 		this.weapon = "Rusted Sword";
 		this.armor = 1;
 		this.armorName = "tattered robes"
@@ -56,8 +56,8 @@ export default class Grunt extends Phaser.Physics.Arcade.Sprite {
 		//roll for atack, defense and damage
 		let atkRoll = Math.floor(Math.random()*10)+this.combat;
 		let defRoll = Math.floor(Math.random()*10)+target.dodge;
-		let damageRoll = Math.floor(Math.random()*10)+this.damage;
-		console.log(`attack ${atkRoll}, defense ${defRoll}`)
+		let damageRoll = Math.floor(Math.random()*this.damage);
+		console.log(`attack ${atkRoll}, defense ${defRoll}, damage ${damageRoll}`)
 
 		//check values and resolve combat outcome
 		if (atkRoll>defRoll) {
