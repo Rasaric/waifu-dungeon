@@ -17,6 +17,7 @@ export default class Grunt extends Phaser.Physics.Arcade.Sprite {
 		this.displayWidth= 64;
 		this.displayHeight= 64;
 		this.scene.physics.world.enable(this);
+		this.setCollideWorldBounds(true);
     this.setImmovable(false);
     scene.add.existing(this);
 

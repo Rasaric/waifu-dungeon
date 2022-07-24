@@ -67,31 +67,17 @@ export default class Game extends Phaser.Scene {
       //generate an angle
       let angle = (Math.random()*Math.PI*2);
 
-      // console.log("angle: " + angle);
-      //set max radius
-      let randX = Math.random()*300;
-      let randY = Math.random()*300;
-      let radiusX = Math.cos(angle) * randX;
-      let radiusY = Math.sin(angle) * randY;
-
-      //min radius
-      let minRadX = Math.cos(angle) * 200;
-      let minRadY = Math.sin(angle) * 200;
+      //generate a point within a taurus
+      let radiusX = Math.cos(angle) * ((Math.random()*300)+200);
+      let radiusY = Math.sin(angle) * ((Math.random()*300)+200);;
 
       //player relative coordinate
       let playerPositionX = this.player.x + radiusX;
       let playerPositionY = this.player.y + radiusY;
 
-      if(Math.abs(radiusX)<Math.abs(minRadX) || Math.abs(radiusY)<Math.abs(minRadY)){
-        //if point in angle is below roo radius
-        return;
-      } else {
-        this.grunt = this.grunts.create(playerPositionX, playerPositionY, 'grunt');
-        this.grunt.setCollideWorldBounds(true);
-        this.physics.add.collider(this.player, this.grunts, this.grunt.onFight, null, this.grunt);
-         //console.log(randX + " " +  randY);
-      }
+      this.grunt = this.grunts.create(playerPositionX, playerPositionY, 'grunt');
+      this.grunt.setCollideWorldBounds(true);
+      this.physics.add.collider(this.player, this.grunts, this.grunt.onFight, null, this.grunt);
     }
-
   }
 }
