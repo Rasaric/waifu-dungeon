@@ -102,7 +102,7 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
 	//attack----------------------------------------------------------------------
 
 	onFight(target, player){
-		target.setVelocityY(1000);
+		target.setVelocityY(-1000);
 		setTimeout(()=>target.setVelocityX(0),100)
 		let atkRoll = Math.floor(Math.random()*10)+this.combat;
 		let defRoll = Math.floor(Math.random()*10)+target.dodge;

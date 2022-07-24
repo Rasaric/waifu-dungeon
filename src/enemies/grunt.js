@@ -17,9 +17,7 @@ export default class Grunt extends Phaser.Physics.Arcade.Sprite {
 		this.displayWidth= 64;
 		this.displayHeight= 64;
 		this.scene.physics.world.enable(this);
-    //this.scene.physics.add.collider(this, scene.player)
     this.setImmovable(false);
-    this.setCollideWorldBounds(true);
     scene.add.existing(this);
 
 		//attributes****************************************************************
@@ -39,9 +37,6 @@ export default class Grunt extends Phaser.Physics.Arcade.Sprite {
 	/*character Methods**********************************************************/
 
 	//attack----------------------------------------------------------------------
-	onCollide(){
-		console.log('boop');
-	}
 	onFight(target, grunt){
 		//prevent grunt from attack spamming
 		if (this.cooldown==true) {return;
@@ -57,12 +52,10 @@ export default class Grunt extends Phaser.Physics.Arcade.Sprite {
 		let atkRoll = Math.floor(Math.random()*10)+this.combat;
 		let defRoll = Math.floor(Math.random()*10)+target.dodge;
 		let damageRoll = Math.floor(Math.random()*this.damage);
-		console.log(`attack ${atkRoll}, defense ${defRoll}, damage ${damageRoll}`)
 
 		//check values and resolve combat outcome
 		if (atkRoll>defRoll) {
 			let damageDealt = damageRoll-target.armor;
-			console.log('damage: ' + damageDealt);
 			if (damageDealt<=0) {console.log(`${this.name} barely glanced ${target.name}'s ${target.armorName}`);}
 			else{
 				target.health = target.health-damageDealt;
