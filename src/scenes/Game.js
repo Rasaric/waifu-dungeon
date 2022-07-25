@@ -77,7 +77,7 @@ export default class Game extends Phaser.Scene {
 
       this.grunt = this.grunts.create(playerPositionX, playerPositionY, 'grunt');
       this.grunt.setCollideWorldBounds(true);
-      this.physics.add.collider(this.player, this.grunts, this.grunt.onFight, null, this.grunt);
+      this.physics.add.collider(this.player, this.grunts, this.grunt.onFight, null, this);
     }
   }
 }

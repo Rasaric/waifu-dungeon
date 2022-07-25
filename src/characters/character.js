@@ -54,6 +54,7 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
 		this.armor = 1;
 		this.armorName = "Nude Body"
 		this.cooldown = false;
+		this.isKnockedback = 'enable'
 
 		// get health() 	{
 		// 	return this.health
@@ -70,34 +71,39 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
 
 	//controls--------------------------------------------------------------------
 	controls(keys, space){
-		this.setVelocity(0);
-		//horizontal movement
-		if (keys.A.isDown) {
-			this.setVelocityX(-160);
-		} else if (keys.D.isDown) {
-			this.setVelocityX(160);
-		}
-		//vertical movement
-		if (keys.W.isDown) {
-			this.setVelocityY(-160);
-		} else if (keys.S.isDown) {
-			this.setVelocityY(160);
-		}
+		if (this.isKnockedback=='disable'){
+			return;
+		} else {
+			this.setVelocity(0);
+			//horizontal movement
+			if (keys.A.isDown) {
+				this.setVelocityX(-160);
+			} else if (keys.D.isDown) {
+				this.setVelocityX(160);
+			}
+			//vertical movement
+			if (keys.W.isDown) {
+				this.setVelocityY(-160);
+			} else if (keys.S.isDown) {
+				this.setVelocityY(160);
+			}
 
-		//interaction---------------------------------------------------------------
-		//attack
-		if(Phaser.Input.Keyboard.JustDown(space)){
-			if (this.cooldown==true) {return;
-			}	else {
-				this.cooldown = true;
-				this.onFight('you');
-				setTimeout(() => {this.cooldown=false},500)
+			//interaction---------------------------------------------------------------
+			//attack
+			if(Phaser.Input.Keyboard.JustDown(space)){
+				if (this.cooldown==true) {return;
+				}	else {
+					this.cooldown = true;
+					this.onFight('you');
+					setTimeout(() => {this.cooldown=false},500)
+				}
+			}
+			//open inventory
+			if(Phaser.Input.Keyboard.JustDown(keys.E)){
+				console.log('inventory screen:' + this.inventory);
 			}
 		}
-		//open inventory
-		if(Phaser.Input.Keyboard.JustDown(keys.E)){
-			console.log('inventory screen:' + this.inventory);
-		}
+
 	}
 	//attack----------------------------------------------------------------------
 

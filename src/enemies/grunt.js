@@ -38,37 +38,48 @@ export default class Grunt extends Phaser.Physics.Arcade.Sprite {
 	/*character Methods**********************************************************/
 
 	//attack----------------------------------------------------------------------
-	onFight(target, grunt){
+	onFight(target, attacker){
 		//prevent grunt from attack spamming
-		if (this.cooldown==true) {return;
+		if (attacker.cooldown==true) {return;
 		}	else {
-			this.cooldown = true;
-			setTimeout(() => {this.cooldown=false},1000)
+			attacker.cooldown = true;
+			setTimeout(() => {attacker.cooldown=false},1000)
 		}
-		//knockback**NOT WORKING
-		target.setVelocityY(-1000);
-		setTimeout(()=>target.setVelocityY(0),300);
+		//knockback
+		target.isKnockedback = 'disable';
+		target.setVelocity(0);
+		let xAngle = (target.x-attacker.x)*10;
+		let yAngle = (target.y-attacker.y)*10;
+		target.body.velocity.x = xAngle;
+		target.body.velocity.x = yAngle;
+
+		//Phaser.Game.scene.keyboard.enabled = false;
+		target.setVelocityY(yAngle);
+		target.setVelocityX(xAngle);
+
+		// this.time.addEvent({ delay: 300, callback: yourFunc, callbackScope: this });
+		setTimeout(() => {target.isKnockedback = 'enable';},100);
 
 		//roll for atack, defense and damage
-		let atkRoll = Math.floor(Math.random()*10)+this.combat;
+		let atkRoll = Math.floor(Math.random()*10)+attacker.combat;
 		let defRoll = Math.floor(Math.random()*10)+target.dodge;
-		let damageRoll = Math.floor(Math.random()*this.damage);
+		let damageRoll = Math.floor(Math.random()*attacker.damage);
 
 		//check values and resolve combat outcome
 		if (atkRoll>defRoll) {
 			let damageDealt = damageRoll-target.armor;
-			if (damageDealt<=0) {console.log(`${this.name} barely glanced ${target.name}'s ${target.armorName}`);}
+			if (damageDealt<=0) {console.log(`${attacker.name} barely glanced ${target.name}'s ${target.armorName}`);}
 			else{
 				target.health = target.health-damageDealt;
 				if(target.health<=0){
-					console.log(`${this.name} killed ${target.name} with her ${this.weapon}!`);
+					console.log(`${attacker.name} killed ${target.name} with her ${attacker.weapon}!`);
 					target.isAlive=false;
 				} else {
-					console.log(`${this.name} attacked ${target.name} for ${damageDealt} damage with their ${this.weapon}, ${target.name} has ${target.health}hp left`);
+					console.log(`${attacker.name} attacked ${target.name} for ${damageDealt} damage with their ${attacker.weapon}, ${target.name} has ${target.health}hp left`);
 				}
 			}
 		} else {
-			console.log(`${target.name} dodged ${this.name}'s attack`);
+			console.log(`${target.name} dodged ${attacker.name}'s attack`);
 		}
 	}
   //AI--------------------------------------------------------------------------
