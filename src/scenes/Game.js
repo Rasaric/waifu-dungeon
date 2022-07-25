@@ -29,13 +29,14 @@ export default class Game extends Phaser.Scene {
     this.add.image(600, 430, 'floor');
 
     //import player sprite------------------------------------------------------
-    this.player = new Character(this, 600, 430, 'player');
+    this.player = new Character(this, 600, 430, 'player', 64, 64, 'bare hands', 'nude body', 10);
 
-    //single grunt for testing
-    //this.grunt = new Grunt(this, 600, 300, 'grunt');
+    // //single grunt for testing
+    //this.grunt = new Grunt(this, 600, 300, 'grunt',64 , 64, 'rusty sword', 'tattered robes', 10);
 
     //grunts--------------------------------------------------------------------
     this.grunts = this.physics.add.group({ classType: Grunt });
+
 
     // //set camera to follow character
     this.cameras.main.startFollow(this.player, true);
@@ -44,7 +45,7 @@ export default class Game extends Phaser.Scene {
   //update game state***********************************************************
   update() {
     //update inputs-------------------------------------------------------------
-    this.player.controls(this.keys, this.spacebar);
+    this.player.controls(this.keys, this.spacebar, this.player);
 
     //spawn grunts -------------------------------------------------------------
     if(this.grunts.countActive(true)<=20) {
@@ -61,8 +62,8 @@ export default class Game extends Phaser.Scene {
       let playerPositionY = this.player.y + radiusY;
 
       this.grunt = this.grunts.create(playerPositionX, playerPositionY, 'grunt');
+      this.physics.add.collider(this.player, this.grunt, this.grunt.onFight, null, this);
       this.grunt.setCollideWorldBounds(true);
-      this.physics.add.collider(this.player, this.grunts, this.grunt.onFight, null, this);
     }
   }
 }
