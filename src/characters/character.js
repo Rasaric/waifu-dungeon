@@ -8,25 +8,6 @@ Character Constructor
 
 //required----------------------------------------------------------------------
 import Phaser from 'phaser'
-// import Chest from '../items/Chest'
-
-// import { sceneEvents } from '../events/EventsCenter'
-
-//character builder-------------------------------------------------------------
-// declare global {
-// 	namespace Phaser.GameObjects 	{
-// 		interface GameObjectFactory 		{
-// 			character(x: number, y: number, texture: string, frame?: string | number): Player
-// 		}
-// 	}
-// }
-
-// enum HealthState
-// {
-// 	IDLE,
-// 	DAMAGE,
-// 	DEAD
-// }
 
 export default class Character extends Phaser.Physics.Arcade.Sprite {
 	constructor(scene, x, y, texture) {
@@ -54,24 +35,17 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
 		this.armor = 1;
 		this.armorName = "Nude Body"
 		this.cooldown = false;
-		this.isKnockedback = 'enable'
+		this.isKnockedback = false;
+		this.cooldownSpeed = 500;
+		this.isAlive = true;
 
-		// get health() 	{
-		// 	return this.health
-		// }
-		//collisions****************************************************************
-		// this.physics.add.collider(this.player, this.wall);
-    // this.physics.add.overlap(this.player, this.chest, function (player, chest) {
-    //     goldPickupAudio.play();
-    //     chest.destroy();
-    // });
 	}
 
 	/*character Methods**********************************************************/
 
 	//controls--------------------------------------------------------------------
 	controls(keys, space){
-		if (this.isKnockedback=='disable'){
+		if (this.isKnockedback == true || this.isAlive == false){
 			return;
 		} else {
 			this.setVelocity(0);
@@ -91,11 +65,12 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
 			//interaction---------------------------------------------------------------
 			//attack
 			if(Phaser.Input.Keyboard.JustDown(space)){
-				if (this.cooldown==true) {return;
+				if (this.cooldown==true) {
+					return;
 				}	else {
 					this.cooldown = true;
 					this.onFight('you');
-					setTimeout(() => {this.cooldown=false},500)
+					this.scene.scene.time.addEvent({ delay: 1000, callback: () => {this.cooldown=false}, callbackScope: this });
 				}
 			}
 			//open inventory
@@ -105,54 +80,63 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
 		}
 
 	}
-	//attack----------------------------------------------------------------------
+	//attack function-------------------------------------------------------------
+	onFight(target, attacker){
+		//prevent grunt from attack spamming
+		if (attacker.cooldown==true) {return;
+		}	else {
+			attacker.cooldown = true;
+			this.scene.scene.time.addEvent({ delay: 1000, callback: () => {attacker.cooldown=false}, callbackScope: this });
+		}
+		//knockback-----------------------------------------------------------------
+		target.isKnockedback = true;
+		target.setVelocity(0);
 
-	onFight(target, player){
-		target.setVelocityY(-1000);
-		setTimeout(()=>target.setVelocityX(0),100)
-		let atkRoll = Math.floor(Math.random()*10)+this.combat;
+		// calculate angle
+		let xAngle = (target.x-attacker.x)*attacker.knockbackSpeed;
+		let yAngle = (target.y-attacker.y)*attacker.knockbackSpeed;
+
+		// set speed character is knocked back
+		target.setVelocityY(yAngle);
+		target.setVelocityX(xAngle);
+
+		// after a moment, return to static
+		function resetControls() {
+			target.isKnockedback = false
+		}
+		this.scene.scene.time.addEvent({ delay: 100, callback: resetControls, callbackScope: this });
+		//setTimeout(() => {target.isKnockedback = false;},100);
+
+		//roll for attack, defense and damage---------------------------------------
+		let atkRoll = Math.floor(Math.random()*10)+attacker.combat;
 		let defRoll = Math.floor(Math.random()*10)+target.dodge;
-		let damageRoll = Math.floor(Math.random()*this.damage);
+		let damageRoll = Math.floor(Math.random()*attacker.damage);
 
-		console.log(`attack ${atkRoll}, defense ${defRoll}`)
-
+		//check values and resolve combat outcome
 		if (atkRoll>defRoll) {
 			let damageDealt = damageRoll-target.armor;
-			console.log('damage: ' + damageDealt);
-			if (damageDealt<=0) {console.log(`${this.name} barely glanced ${target.name}'s ${target.armorName}`);}
-			else{
+			if (damageDealt<=0) {
+				console.log(`${attacker.name} barely glanced ${target.name}'s ${target.armorName}`);
+			}	else {
 				target.health = target.health-damageDealt;
 				if(target.health<=0){
-					console.log(`${this.name} killed ${target.name} with her ${this.weapon}!`);
-					target.isAlive=false;
+					console.log(`${attacker.name} killed ${target.name} with her ${attacker.weapon}!`);
+					target.setTint(0xff0000);
+					target.isAlive = false;
+						target.setVelocity(yAngle);
 				} else {
-					console.log(`${this.name} attacked ${target.name} for ${damageDealt} damage with their ${this.weapon}, ${target.name} has ${target.health}hp left`);
+					target.setTint(0xff0000);
+					this.scene.scene.time.addEvent({ delay: 400, callback: () => {target.setTint(0xffffff);}, callbackScope: this });
+					console.log(`${attacker.name} attacked ${target.name} for ${damageDealt} damage with their ${attacker.weapon}, ${target.name} has ${target.health}hp left`);
 				}
 			}
 		} else {
-			console.log(`${target.name} dodged ${this.name}'s attack`);
+			console.log(`${target.name} dodged ${attacker.name}'s attack`);
 		}
 	}
 
+	// add item to inventory------------------------------------------------------
 	addItem(item){
 		this.inventory.push(item);
 	}
-
-	// preUpdate(t: number, dt: number) {
-	// 	super.preUpdate(t, dt)
-	//
-	// 	switch (this.healthState)	{
-	// 		case HealthState.IDLE:
-	// 			break
-	//
-	// 		case HealthState.DAMAGE:
-	// 			this.damageTime += dt
-	// 			if (this.damageTime >= 250){
-	// 				this.healthState = HealthState.IDLE
-	// 				this.setTint(0xffffff)
-	// 				this.damageTime = 0
-	// 			}
-	// 			break
-	// 	}
-	// }
 }

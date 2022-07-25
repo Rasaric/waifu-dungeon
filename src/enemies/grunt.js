@@ -23,7 +23,7 @@ export default class Grunt extends Phaser.Physics.Arcade.Sprite {
 
 		//attributes****************************************************************
 		//basic attributes
-		this.name= 'Grunt';
+		this.name= texture;
 		//stats
 		this.health = 1;
 		this.combat = 5;
@@ -33,6 +33,8 @@ export default class Grunt extends Phaser.Physics.Arcade.Sprite {
 		this.armor = 1;
 		this.armorName = "tattered robes"
 		this.cooldown = false;
+		this.isKnockedback = false;
+		this.knockbackSpeed = 10;
 	}
 
 	/*character Methods**********************************************************/
@@ -40,27 +42,32 @@ export default class Grunt extends Phaser.Physics.Arcade.Sprite {
 	//attack----------------------------------------------------------------------
 	onFight(target, attacker){
 		//prevent grunt from attack spamming
-		if (attacker.cooldown==true) {return;
+		if (attacker.cooldown==true) {
+			return;
 		}	else {
 			attacker.cooldown = true;
-			setTimeout(() => {attacker.cooldown=false},1000)
+			this.scene.scene.time.addEvent({ delay: 1000, callback: () => {attacker.cooldown=false}, callbackScope: this });
 		}
-		//knockback
-		target.isKnockedback = 'disable';
+		//knockback-----------------------------------------------------------------
+		target.isKnockedback = true;
 		target.setVelocity(0);
-		let xAngle = (target.x-attacker.x)*10;
-		let yAngle = (target.y-attacker.y)*10;
-		target.body.velocity.x = xAngle;
-		target.body.velocity.x = yAngle;
 
-		//Phaser.Game.scene.keyboard.enabled = false;
+		// calculate angle
+		let xAngle = (target.x-attacker.x)*attacker.knockbackSpeed;
+		let yAngle = (target.y-attacker.y)*attacker.knockbackSpeed;
+
+		// set speed character is knocked back
 		target.setVelocityY(yAngle);
 		target.setVelocityX(xAngle);
 
-		// this.time.addEvent({ delay: 300, callback: yourFunc, callbackScope: this });
-		setTimeout(() => {target.isKnockedback = 'enable';},100);
+		// after a moment, return to static
+		function resetControls() {
+			target.isKnockedback = false
+		}
+		this.scene.scene.time.addEvent({ delay: 100, callback: resetControls, callbackScope: this });
+		//setTimeout(() => {target.isKnockedback = false;},100);
 
-		//roll for atack, defense and damage
+		//roll for attack, defense and damage---------------------------------------
 		let atkRoll = Math.floor(Math.random()*10)+attacker.combat;
 		let defRoll = Math.floor(Math.random()*10)+target.dodge;
 		let damageRoll = Math.floor(Math.random()*attacker.damage);
@@ -68,13 +75,18 @@ export default class Grunt extends Phaser.Physics.Arcade.Sprite {
 		//check values and resolve combat outcome
 		if (atkRoll>defRoll) {
 			let damageDealt = damageRoll-target.armor;
-			if (damageDealt<=0) {console.log(`${attacker.name} barely glanced ${target.name}'s ${target.armorName}`);}
-			else{
+			if (damageDealt<=0) {
+				console.log(`${attacker.name} barely glanced ${target.name}'s ${target.armorName}`);
+			}	else {
 				target.health = target.health-damageDealt;
 				if(target.health<=0){
 					console.log(`${attacker.name} killed ${target.name} with her ${attacker.weapon}!`);
-					target.isAlive=false;
+					target.setTint(0xff0000);
+					target.isAlive = false;
+						target.setVelocity(yAngle);
 				} else {
+					target.setTint(0xff0000);
+					this.scene.scene.time.addEvent({ delay: 400, callback: () => {target.setTint(0xffffff);}, callbackScope: this });
 					console.log(`${attacker.name} attacked ${target.name} for ${damageDealt} damage with their ${attacker.weapon}, ${target.name} has ${target.health}hp left`);
 				}
 			}

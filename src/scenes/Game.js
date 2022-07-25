@@ -31,37 +31,22 @@ export default class Game extends Phaser.Scene {
     //import player sprite------------------------------------------------------
     this.player = new Character(this, 600, 430, 'player');
 
-    //determine player position, randomize position in safe area
-    let playerPositionX = this.player.x + (Math.round(Math.random()) * 2 - 1)*(Math.floor(Math.random()*100))+100;
-    let playerPositionY = this.player.y + (Math.round(Math.random()) * 2 - 1)*(Math.floor(Math.random()*100))+100;
-
     //single grunt for testing
     //this.grunt = new Grunt(this, 600, 300, 'grunt');
 
     //grunts--------------------------------------------------------------------
     this.grunts = this.physics.add.group({ classType: Grunt });
-    // if(this.grunts.countActive(true)<=5) { //if less than 5 grunts
-    //   //generate a grunt a safe distance from the player
-    //   var playerPositionX = this.player.x + (Math.round(Math.random()) * 2 - 1)*(Math.floor(Math.random()*100))+100;
-    //   var playerPositionY = this.player.y + (Math.round(Math.random()) * 2 - 1)*(Math.floor(Math.random()*100))+100;
-    //   this.grunt = this.grunts.create(playerPositionX, playerPositionY, 'grunt');
-    //   this.grunt.setCollideWorldBounds(true);
-    // }
-
-    //this.grunt = this.grunts.create(playerPositionX, playerPositionY, 'grunt');
-
 
     // //set camera to follow character
     this.cameras.main.startFollow(this.player, true);
-
-    //collisions----------------------------------------------------------------
-    //this.physics.add.overlap(this.player, this.grunts, this.grunt.onFight, null, this.grunt);
   }
 
-  //update game state*************************************************************
+  //update game state***********************************************************
   update() {
+    //update inputs-------------------------------------------------------------
     this.player.controls(this.keys, this.spacebar);
 
+    //spawn grunts -------------------------------------------------------------
     if(this.grunts.countActive(true)<=20) { //if less than 5 grunts
       //generate a grunt a safe distance from the player
       //generate an angle
