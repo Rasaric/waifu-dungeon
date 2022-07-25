@@ -83,7 +83,8 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
 	//attack function-------------------------------------------------------------
 	onFight(target, attacker){
 		//prevent grunt from attack spamming
-		if (attacker.cooldown==true) {return;
+		if (attacker.cooldown==true) {
+			return;
 		}	else {
 			attacker.cooldown = true;
 			this.scene.scene.time.addEvent({ delay: 1000, callback: () => {attacker.cooldown=false}, callbackScope: this });
@@ -101,11 +102,7 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
 		target.setVelocityX(xAngle);
 
 		// after a moment, return to static
-		function resetControls() {
-			target.isKnockedback = false
-		}
 		this.scene.scene.time.addEvent({ delay: 100, callback: resetControls, callbackScope: this });
-		//setTimeout(() => {target.isKnockedback = false;},100);
 
 		//roll for attack, defense and damage---------------------------------------
 		let atkRoll = Math.floor(Math.random()*10)+attacker.combat;
@@ -134,7 +131,7 @@ export default class Character extends Phaser.Physics.Arcade.Sprite {
 			console.log(`${target.name} dodged ${attacker.name}'s attack`);
 		}
 	}
-
+	
 	// add item to inventory------------------------------------------------------
 	addItem(item){
 		this.inventory.push(item);

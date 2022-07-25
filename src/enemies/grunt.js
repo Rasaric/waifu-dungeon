@@ -61,11 +61,7 @@ export default class Grunt extends Phaser.Physics.Arcade.Sprite {
 		target.setVelocityX(xAngle);
 
 		// after a moment, return to static
-		function resetControls() {
-			target.isKnockedback = false
-		}
 		this.scene.scene.time.addEvent({ delay: 100, callback: resetControls, callbackScope: this });
-		//setTimeout(() => {target.isKnockedback = false;},100);
 
 		//roll for attack, defense and damage---------------------------------------
 		let atkRoll = Math.floor(Math.random()*10)+attacker.combat;

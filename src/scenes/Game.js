@@ -47,7 +47,7 @@ export default class Game extends Phaser.Scene {
     this.player.controls(this.keys, this.spacebar);
 
     //spawn grunts -------------------------------------------------------------
-    if(this.grunts.countActive(true)<=20) { //if less than 5 grunts
+    if(this.grunts.countActive(true)<=20) {
       //generate a grunt a safe distance from the player
       //generate an angle
       let angle = (Math.random()*Math.PI*2);
