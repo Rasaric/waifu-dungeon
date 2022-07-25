@@ -8,18 +8,23 @@ Enemy Constructor - Grunt
 
 //required----------------------------------------------------------------------
 import Phaser from 'phaser'
-import BaseCharacter from '../characters/baseCharacter'
+import Grunt from '../enemies/grunt'
 
-export default class Grunt extends BaseCharacter {
+export default class Boss extends Grunt {
 	constructor(scene, x, y, texture, dH, dW, weapon, armor, kbS) {
 		super(scene, x, y, texture, dH, dW, weapon, armor, kbS);
 
-		this.displayWidth = 64;
-		this.displayHeight = 64;
-		this.weapon = 'rusty sword';
-		this.armorName = 'tattered robes';
-		this.knockbackSpeed = 10;
-		this.attackCooldown = 1000;
+		this.displayWidth = 256;
+		this.displayHeight = 256;
+		this.health = 20;
+		this.combat = 10;
+		this.dodge = 5;
+		this.damage = 20;
+		this.weapon = 'Colossal Club';
+		this.armor = 10;
+		this.armorName = 'Fat, blubbery skin';
+		this.knockbackSpeed = 30;
+		this.attackCooldown = 2500;
 	}
 
 	/*Grunt Methods**************************************************************/
