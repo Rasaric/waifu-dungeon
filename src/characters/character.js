@@ -10,7 +10,7 @@ Character Constructor
 import Phaser from 'phaser'
 import BaseCharacter from '../characters/baseCharacter'
 
-export default class Character extends Base {
+export default class Character extends BaseCharacter {
 	constructor(scene, x, y, texture, dH, dW, weapon, armor, kbS) {
 		super(scene, x, y, texture, dH, dW, weapon, armor, kbS);
 		//attributes****************************************************************

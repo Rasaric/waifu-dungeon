@@ -10,7 +10,7 @@ Enemy Constructor - Grunt
 import Phaser from 'phaser'
 import BaseCharacter from '../characters/baseCharacter'
 
-export default class Grunt extends Base {
+export default class Grunt extends BaseCharacter {
 	constructor(scene, x, y, texture, dH, dW, weapon, armor, kbS) {
 		super(scene, x, y, texture, dH, dW, weapon, armor, kbS);
 
