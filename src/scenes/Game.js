@@ -11,6 +11,7 @@ import Character from '../characters/character'
 import Grunt from '../enemies/grunt'
 import Soldier from '../enemies/soldier'
 import Boss from '../enemies/boss'
+import DungeonMap from '../map/map'
 
 //initiate game instance********************************************************
 export default class Game extends Phaser.Scene {
@@ -29,6 +30,8 @@ export default class Game extends Phaser.Scene {
 
     //import floor sprite-------------------------------------------------------
     this.add.image(600, 430, 'floor');
+    this.dungeonMap = new DungeonMap(20, 50, 50, 10, 5, 5, 1)
+    this.dungeonMap.onGenerate(this)
 
     //import player sprite------------------------------------------------------
     this.player = new Character(this, 600, 430, 'player', 64, 64, 'bare hands', 'nude body', 10, 1000);
