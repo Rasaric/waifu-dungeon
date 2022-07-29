@@ -37,15 +37,15 @@ export default class Character extends BaseCharacter {
 			player.setVelocity(0);
 			//horizontal movement
 			if (keys.A.isDown) {
-				player.setVelocityX(-160);
+				player.setVelocityX(-1600);
 			} else if (keys.D.isDown) {
-				player.setVelocityX(160);
+				player.setVelocityX(1600);
 			}
 			//vertical movement
 			if (keys.W.isDown) {
-				player.setVelocityY(-160);
+				player.setVelocityY(-1600);
 			} else if (keys.S.isDown) {
-				player.setVelocityY(160);
+				player.setVelocityY(1600);
 			}
 
 			//interaction---------------------------------------------------------------

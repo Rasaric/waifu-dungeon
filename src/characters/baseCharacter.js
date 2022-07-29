@@ -17,7 +17,7 @@ export default class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
 		this.displayWidth= dW;
 		this.displayHeight= dH;
 		this.scene.physics.world.enable(this);
-		this.setCollideWorldBounds(true);
+		//this.setCollideWorldBounds(true);
     this.setImmovable(false);
     scene.add.existing(this);
 
@@ -99,7 +99,7 @@ export default class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
 			//generate a mob a safe distance from the player
 			//generate an angle
 			let angle = (Math.random()*Math.PI*2);
-			
+
 			//generate a point within a taurus
 			let playerPositionX = player.x+ Math.sin(angle) * ((Math.random()*spawnDistanceMax)+spawnDistanceMin);
 			let playerPositionY = player.y+ Math.cos(angle) * ((Math.random()*spawnDistanceMax)+spawnDistanceMin);;

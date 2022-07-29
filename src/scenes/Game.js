@@ -29,13 +29,17 @@ export default class Game extends Phaser.Scene {
     this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
     //import floor sprite-------------------------------------------------------
-    this.add.image(600, 430, 'floor');
-    this.dungeonMap = new DungeonMap(20, 50, 50, 10, 5, 5, 1)
-    this.dungeonMap.onGenerate(this)
-
+    //this.add.image(600, 430, 'floor');
+    this.dungeonMap = new DungeonMap(64, 100, 100, 10, 8, 5, 2)
+    //dungW, dungRows, dungCols, dungAmount, dungSize, dungSizeMin, dungCorridorW
+    this.dungeonMap.onGenerate(this);
+    let randRoom = Math.floor(Math.random()*this.dungeonMap.rooms.length)
+    let coordX=this.dungeonMap.rooms[randRoom].x+(this.dungeonMap.rooms[randRoom].w/2);
+    let coordY=this.dungeonMap.rooms[randRoom].y+(this.dungeonMap.rooms[randRoom].h/2);
     //import player sprite------------------------------------------------------
-    this.player = new Character(this, 600, 430, 'player', 64, 64, 'bare hands', 'nude body', 10, 1000);
+    this.player = new Character(this, coordX, coordY, 'player', 64, 64, 'bare hands', 'nude body', 10, 1000);
 
+    this.dungeonMap.regenCollision(this, this.dungeonMap);
     // //single grunt for testing
     //this.grunt = new Grunt(this, 600, 300, 'grunt',64 , 64, 'rusty sword', 'tattered robes', 10);
 
@@ -54,8 +58,8 @@ export default class Game extends Phaser.Scene {
 
     //spawn check --------------------------------------------------------------
 
-    this.player.spawn(this, this.grunts, this.player, this.grunt, 'grunt', 5, 200, 300);
-    this.player.spawn(this, this.soldiers, this.player, this.soldier, 'grunt', 5, 250,300);
-    this.player.spawn(this, this.bosses, this.player, this.boss, 'grunt', 1, 300, 500);
+    // this.player.spawn(this, this.grunts, this.player, this.grunt, 'grunt', 5, 200, 300);
+    // this.player.spawn(this, this.soldiers, this.player, this.soldier, 'grunt', 5, 250,300);
+    // this.player.spawn(this, this.bosses, this.player, this.boss, 'grunt', 1, 300, 500);
   }
 }
