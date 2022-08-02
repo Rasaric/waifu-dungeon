@@ -35,8 +35,6 @@ export default class DungeonMap {
 
 //Generation Method*************************************************************
   onGenerate(scene){
-    scene.walls = scene.physics.add.group({ classType: Cell });
-
     //create the array of tiles*************************************************
     function makeGrid(dungeon, scene) {
       for (var r = 0; r < dungeon.rows; r++) {
@@ -74,7 +72,7 @@ export default class DungeonMap {
 
         //if not the first room-------------------------------------------------
         if(i > 0) {
-          if(dungeon.rooms[0].x+dungeon.rooms[0].w >= scene.width || dungeon.rooms[0].x <= 0 || dungeon.rooms[0].y+dungeon.rooms[0].h >= scene.height || dungeon.rooms[0].y <= 0) {//if first room is outside the canvas
+          if(dungeon.rooms[0].x+dungeon.rooms[0].w >= dungeon.rows*dungeon.w || dungeon.rooms[0].x <= 0 || dungeon.rooms[0].y+dungeon.rooms[0].h >= dungeon.rows*dungeon.w || dungeon.rooms[0].y <= 0) {//if first room is outside the canvas
             dungeon.rooms = [] //restart
             createRooms(dungeon);
             break;

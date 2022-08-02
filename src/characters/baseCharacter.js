@@ -96,24 +96,29 @@ export default class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
 	// spawn all the enemies------------------------------------------------------
 	spawn(scene, group, player, toSpawn, spawnSprite, spawnThreshold, spawnDistanceMin, spawnDistanceMax) {
 		if(group.countActive(true)<=spawnThreshold) {
-			//generate a mob a safe distance from the player
-			//generate an angle
-			let angle = (Math.random()*Math.PI*2);
+			//random room-------------------------------------------------------------
+			let randRoom = Math.floor(Math.random()*scene.dungeonMap.rooms.length);
 
-			//generate a point within a taurus
-			let playerPositionX = player.x+ Math.sin(angle) * ((Math.random()*spawnDistanceMax)+spawnDistanceMin);
-			let playerPositionY = player.y+ Math.cos(angle) * ((Math.random()*spawnDistanceMax)+spawnDistanceMin);;
-			if (playerPositionX <= 0 || playerPositionY <= 0 || playerPositionX >= (scene.dungeonMap.cols*scene.dungeonMap.w) || playerPositionY >= (scene.dungeonMap.cols*scene.dungeonMap.w)){
+			// generate coordinates from room-----------------------------------------
+			let coordX=scene.dungeonMap.rooms[randRoom].x+Math.floor(Math.random()*(scene.dungeonMap.rooms[randRoom].w));
+			let coordY=scene.dungeonMap.rooms[randRoom].y+Math.floor(Math.random()*(scene.dungeonMap.rooms[randRoom].h));
+
+			console.log(`x coord: ${coordX}, cell: ${coordX/64}, player: ${player.x}`);
+			console.log(`y coord: ${coordY}, cell: ${coordY/64}, player: ${player.y}`);
+
+			// if out of bounds--------------------------------------------------------
+			if (coordX <= 0 || coordY <= 0 || coordX >= (scene.dungeonMap.cols*scene.dungeonMap.w) || coordY >= (scene.dungeonMap.cols*scene.dungeonMap.w)){
 				console.log("tried to spawn beyond " + (scene.dungeonMap.cols*scene.dungeonMap.w));
-				console.log(player.x);
-				console.log(player.y);
-			} else {
-				console.log(playerPositionX);
-				console.log(playerPositionY);
-				toSpawn = group.create(playerPositionX, playerPositionY, spawnSprite);
+
+				//if too close----------------------------------------------------------
+			} else if(Math.abs(coordX-player.x)<spawnDistanceMin || Math.abs(coordY-player.y)<spawnDistanceMin){
+				console.log("too close bud");
+
+				//if everything is ok, spawn mobs---------------------------------------
+			}	else {
+				toSpawn = group.create(coordX, coordY, spawnSprite);
 				scene.physics.add.collider(player, toSpawn, toSpawn.onFight, null, this);
 				scene.physics.add.collider(toSpawn, scene.walls)
-				//toSpawn.setCollideWorldBounds(true);}
 			}
 		}
 	}

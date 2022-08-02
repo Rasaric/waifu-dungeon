@@ -34,13 +34,14 @@ export default class Game extends Phaser.Scene {
     //dungW, dungRows, dungCols, dungAmount, dungSize, dungSizeMin, dungCorridorW
     this.dungeonMap.onGenerate(this);
     let randRoom = Math.floor(Math.random()*this.dungeonMap.rooms.length)
-    let coordX=this.dungeonMap.rooms[randRoom].x+(this.dungeonMap.rooms[randRoom].w/2);
-    let coordY=this.dungeonMap.rooms[randRoom].y+(this.dungeonMap.rooms[randRoom].h/2);
+
+    let coordX=this.dungeonMap.rooms[randRoom].x+Math.floor(Math.random()*(this.dungeonMap.rooms[randRoom].w));
+    let coordY=this.dungeonMap.rooms[randRoom].y+Math.floor(Math.random()*(this.dungeonMap.rooms[randRoom].h));
     //import player sprite------------------------------------------------------
     this.player = new Character(this, coordX, coordY, 'player', 64, 64, 'bare hands', 'nude body', 10, 1000);
 
 
-    this.dungeonMap.parseCollide(this);
+    //this.dungeonMap.parseCollide(this);
 
     // //single grunt for testing
     //this.grunt = new Grunt(this, coordX, coordY+100, 'grunt',64 , 64, 'rusty sword', 'tattered robes', 10);
@@ -60,8 +61,8 @@ export default class Game extends Phaser.Scene {
 
     //spawn check --------------------------------------------------------------
 
-    // this.player.spawn(this, this.grunts, this.player, this.grunt, 'grunt', 50, 200, 1000);
-    // this.player.spawn(this, this.soldiers, this.player, this.soldier, 'grunt', 20, 1000);
-    // this.player.spawn(this, this.bosses, this.player, this.boss, 'grunt', 1, 300, 1000);
+    this.player.spawn(this, this.grunts, this.player, this.grunt, 'grunt', 50, 300, 2000);
+    this.player.spawn(this, this.soldiers, this.player, this.soldier, 'grunt', 20, 500, 3000);
+    this.player.spawn(this, this.bosses, this.player, this.boss, 'grunt', 1, 1500, 4000);
   }
 }

@@ -20,7 +20,6 @@ export default class Cell extends Phaser.Physics.Arcade.Sprite{
     this.y = y //y coord
     this.empty = false //empty or full?
     let dungeon = scene.dungeonMap
-    this.cells = [];
   }
   //draw the map------------------------------------------------------------
   show (scene){
