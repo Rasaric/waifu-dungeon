@@ -103,16 +103,13 @@ export default class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
 			let coordX=scene.dungeonMap.rooms[randRoom].x+Math.floor(Math.random()*(scene.dungeonMap.rooms[randRoom].w));
 			let coordY=scene.dungeonMap.rooms[randRoom].y+Math.floor(Math.random()*(scene.dungeonMap.rooms[randRoom].h));
 
-			console.log(`x coord: ${coordX}, cell: ${coordX/64}, player: ${player.x}`);
-			console.log(`y coord: ${coordY}, cell: ${coordY/64}, player: ${player.y}`);
-
 			// if out of bounds--------------------------------------------------------
 			if (coordX <= 0 || coordY <= 0 || coordX >= (scene.dungeonMap.cols*scene.dungeonMap.w) || coordY >= (scene.dungeonMap.cols*scene.dungeonMap.w)){
-				console.log("tried to spawn beyond " + (scene.dungeonMap.cols*scene.dungeonMap.w));
+				return;
 
 				//if too close----------------------------------------------------------
 			} else if(Math.abs(coordX-player.x)<spawnDistanceMin || Math.abs(coordY-player.y)<spawnDistanceMin){
-				console.log("too close bud");
+				return;
 
 				//if everything is ok, spawn mobs---------------------------------------
 			}	else {
