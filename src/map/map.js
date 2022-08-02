@@ -8,7 +8,7 @@ Dungeon Constructor
 
 //required----------------------------------------------------------------------
 import Phaser from 'phaser'
-
+import Cell from '../map/cell'
 export default class DungeonMap {
   constructor(dungW, dungRows, dungCols, dungAmount, dungSize, dungSizeMin, dungCorridorW) {// 20, 50, 50, 10, 5, 5, 1
     // this.canvas = document.getElementById('game');//create canvas
@@ -30,73 +30,22 @@ export default class DungeonMap {
     this.disX; //distance x between rooms
     this.disY; //distance y between rooms
     this.corridorW = dungCorridorW //corridor width
+    this.collidingCells = [];
   }
 
 //Generation Method*************************************************************
   onGenerate(scene){
-    // console.log(`width:${this.w} rows:${this.rows}, columns:${this.cols}, amount of rooms:${this.amount}, size of room:${this.size}, min size:${this.sizeMin}, corridor width:${this.corridorW}`);
-
-    //cell object---------------------------------------------------------------
-    function Cell(dungeon, c, r, x, y){
-      this.c = c //column it is in
-      this.r = r //row it is in
-      this.x = x //x coord
-      this.y = y //y coord
-      this.empty = false //empty or full?
-
-      //draw the map------------------------------------------------------------
-      this.show = function(scene){
-
-        //here's where the output is managed////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////
-        if(this.empty == false) {
-          // empty cells--------------------------------------------------------
-          scene.wall = scene.physics.add.sprite(this.x, this.y, 'empty');
-
-
-        } else {
-          // rooms cells--------------------------------------------------------
-          scene.add.image(this.x, this.y, 'tile');
-          scene.physics.world.enable(this);
-          this.collide = false;
-          scene.add.existing(this);
-
-        }
-      }
-
-      //carve out the rooms-----------------------------------------------------
-      this.carve = function(dungeon, dis, x, y) {
-        for (var i = 0; i < dungeon.rooms.length; i++) {
-          if(this.c >= dungeon.rooms[i].y/dungeon.w && this.c < dungeon.rooms[i].y/dungeon.w+dungeon.rooms[i].h/dungeon.w && this.r >= dungeon.rooms[i].x/dungeon.w && this.r < dungeon.rooms[i].x/dungeon.w+dungeon.rooms[i].w/dungeon.w) {
-            this.empty = true
-          }
-        }
-      }
-
-      //carve out the horizontal corridor---------------------------------------
-      this.carveH = function(dis,x,y) {
-        if(this.r >= x && this.r < x+dis && this.c < y+dungeon.corridorW && this.c > y-dungeon.corridorW)
-        {
-          this.empty = true
-        }
-      }
-
-      //carve out the vertical corridor-----------------------------------------
-      this.carveV = function(dis,x,y) {
-        if(this.c >= y && this.c < y+dis && this.r < x+dungeon.corridorW && this.r > x-dungeon.corridorW) {
-          this.empty = true
-        }
-      }
-    }
     scene.walls = scene.physics.add.group({ classType: Cell });
+
     //create the array of tiles*************************************************
     function makeGrid(dungeon, scene) {
       for (var r = 0; r < dungeon.rows; r++) {
         for (var c = 0; c < dungeon.cols; c++) {
           var y = c*dungeon.w
           var x = r*dungeon.w
-          var cell = new Cell(dungeon, c, r, x, y);
+          var cell = new Cell(scene, c, r, x, y, 'empty');
           dungeon.grid.push(cell);
+
         }
       }
     }
@@ -165,13 +114,13 @@ export default class DungeonMap {
         dungeon.disX += 1
 
         for (var i = 0; i < dungeon.grid.length; i++) {
-          dungeon.grid[i].carveH(dungeon.disX, x2, y2)//carve out the corridor
+          dungeon.grid[i].carveH(dungeon, dungeon.disX, x2, y2)//carve out the corridor
         }
       } else { //if the second room is further towards the right then the first one
         dungeon.disX = x2 - x1 //find the distance between rooms
         dungeon.disX += 1
         for (var i = 0; i < dungeon.grid.length; i++) {
-          dungeon.grid[i].carveH(dungeon.disX, x1, y1)//carve out corridor
+          dungeon.grid[i].carveH(dungeon, dungeon.disX, x1, y1)//carve out corridor
         }
       }
     }
@@ -191,7 +140,7 @@ export default class DungeonMap {
         }
 
         for(var i = 0; i < dungeon.grid.length; i++) {
-          dungeon.grid[i].carveV(dungeon.disY, x, y2)//carve out corridor
+          dungeon.grid[i].carveV(dungeon,dungeon.disY, x, y2)//carve out corridor
         }
       } else{ //if the second room is further towards the bottom then the first one
 
@@ -205,7 +154,7 @@ export default class DungeonMap {
         }
 
         for (var i = 0; i < dungeon.grid.length; i++) {
-          dungeon.grid[i].carveV(dungeon.disY, x, y1)//carve out corridor
+          dungeon.grid[i].carveV(dungeon, dungeon.disY, x, y1)//carve out corridor
         }
       }
     }
@@ -223,19 +172,17 @@ export default class DungeonMap {
     }
 
     // initiate methods*********************************************************
-    makeGrid(this)//make map
+    makeGrid(this, scene)//make map
     createRooms(this)//make rooms
     draw(this, scene)//update
   }
-  regenCollision(scene, dungeon){
-
-    for(var i = 0; i < dungeon.grid.length; i++) {
-      if (dungeon.grid[i].empty==false){
-        scene.physics.add.collider(dungeon.grid[i], scene.player, dungeon.grid[i].collide, null, scene);
-      }
+  parseCollide(scene){
+    for (var i = 0; i < scene.dungeonMap.collidingCells.length; i++) {
+      scene.physics.add.collider(scene.player, scene.dungeonMap.collidingCells[i]);
+      scene.dungeonMap.collidingCells[i].setImmovable(true);
     }
   }
-  collide(cell, player){
+  collide(player, cell){
     console.log('boop');
   }
 

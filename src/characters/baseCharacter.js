@@ -18,8 +18,8 @@ export default class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
 		this.displayHeight= dH;
 		this.scene.physics.world.enable(this);
 		//this.setCollideWorldBounds(true);
-    this.setImmovable(false);
-    scene.add.existing(this);
+		this.setImmovable(false);
+		scene.add.existing(this);
 
 		//attributes****************************************************************
 		//basic attributes
@@ -80,8 +80,8 @@ export default class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
 					console.log(`${attacker.name} killed ${target.name} with her ${attacker.weapon}!`);
 					target.setTint(0xff0000);
 					target.isAlive = false;
-						target.setVelocityX(0);
-						target.setVelocityY(0);
+					target.setVelocityX(0);
+					target.setVelocityY(0);
 				} else {
 					target.setTint(0xff0000);
 					this.scene.time.addEvent({ delay: 400, callback: () => {target.setTint(0xffffff);}, callbackScope: this });
@@ -103,10 +103,18 @@ export default class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
 			//generate a point within a taurus
 			let playerPositionX = player.x+ Math.sin(angle) * ((Math.random()*spawnDistanceMax)+spawnDistanceMin);
 			let playerPositionY = player.y+ Math.cos(angle) * ((Math.random()*spawnDistanceMax)+spawnDistanceMin);;
-
-			toSpawn = group.create(playerPositionX, playerPositionY, spawnSprite);
-			scene.physics.add.collider(player, toSpawn, toSpawn.onFight, null, this);
-			toSpawn.setCollideWorldBounds(true);
+			if (playerPositionX <= 0 || playerPositionY <= 0 || playerPositionX >= (scene.dungeonMap.cols*scene.dungeonMap.w) || playerPositionY >= (scene.dungeonMap.cols*scene.dungeonMap.w)){
+				console.log("tried to spawn beyond " + (scene.dungeonMap.cols*scene.dungeonMap.w));
+				console.log(player.x);
+				console.log(player.y);
+			} else {
+				console.log(playerPositionX);
+				console.log(playerPositionY);
+				toSpawn = group.create(playerPositionX, playerPositionY, spawnSprite);
+				scene.physics.add.collider(player, toSpawn, toSpawn.onFight, null, this);
+				scene.physics.add.collider(toSpawn, scene.walls)
+				//toSpawn.setCollideWorldBounds(true);}
+			}
 		}
 	}
 }

@@ -39,9 +39,11 @@ export default class Game extends Phaser.Scene {
     //import player sprite------------------------------------------------------
     this.player = new Character(this, coordX, coordY, 'player', 64, 64, 'bare hands', 'nude body', 10, 1000);
 
-    this.dungeonMap.regenCollision(this, this.dungeonMap);
+
+    this.dungeonMap.parseCollide(this);
+
     // //single grunt for testing
-    //this.grunt = new Grunt(this, 600, 300, 'grunt',64 , 64, 'rusty sword', 'tattered robes', 10);
+    //this.grunt = new Grunt(this, coordX, coordY+100, 'grunt',64 , 64, 'rusty sword', 'tattered robes', 10);
 
     //enemies--------------------------------------------------------------------
     this.grunts = this.physics.add.group({ classType: Grunt });
@@ -58,8 +60,8 @@ export default class Game extends Phaser.Scene {
 
     //spawn check --------------------------------------------------------------
 
-    // this.player.spawn(this, this.grunts, this.player, this.grunt, 'grunt', 5, 200, 300);
-    // this.player.spawn(this, this.soldiers, this.player, this.soldier, 'grunt', 5, 250,300);
-    // this.player.spawn(this, this.bosses, this.player, this.boss, 'grunt', 1, 300, 500);
+    // this.player.spawn(this, this.grunts, this.player, this.grunt, 'grunt', 50, 200, 1000);
+    // this.player.spawn(this, this.soldiers, this.player, this.soldier, 'grunt', 20, 1000);
+    // this.player.spawn(this, this.bosses, this.player, this.boss, 'grunt', 1, 300, 1000);
   }
 }
