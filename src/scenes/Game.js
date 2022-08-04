@@ -12,6 +12,7 @@ import Grunt from '../enemies/grunt'
 import Soldier from '../enemies/soldier'
 import Boss from '../enemies/boss'
 import DungeonMap from '../map/map'
+import Cell from '../map/cell'
 
 //initiate game instance********************************************************
 export default class Game extends Phaser.Scene {
@@ -40,8 +41,7 @@ export default class Game extends Phaser.Scene {
     //import player sprite------------------------------------------------------
     this.player = new Character(this, coordX, coordY, 'player', 64, 64, 'bare hands', 'nude body', 10, 1000);
 
-
-    //this.dungeonMap.parseCollide(this);
+    this.physics.add.collider(this.player, this.walls);
 
     // //single grunt for testing
     //this.grunt = new Grunt(this, coordX, coordY+100, 'grunt',64 , 64, 'rusty sword', 'tattered robes', 10);

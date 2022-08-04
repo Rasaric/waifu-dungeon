@@ -35,15 +35,17 @@ export default class DungeonMap {
 
 //Generation Method*************************************************************
   onGenerate(scene){
+    //create physics group the grid will belong to------------------------------
+    scene.walls = scene.physics.add.group({ classType: Cell });
+
     //create the array of tiles*************************************************
     function makeGrid(dungeon, scene) {
       for (var r = 0; r < dungeon.rows; r++) {
         for (var c = 0; c < dungeon.cols; c++) {
           var y = c*dungeon.w
           var x = r*dungeon.w
-          var cell = new Cell(scene, c, r, x, y, 'empty');
+          var cell = new Cell(scene, x, y, 'empty', c, r);
           dungeon.grid.push(cell);
-
         }
       }
     }
@@ -174,14 +176,4 @@ export default class DungeonMap {
     createRooms(this)//make rooms
     draw(this, scene)//update
   }
-  parseCollide(scene){
-    for (var i = 0; i < scene.dungeonMap.collidingCells.length; i++) {
-      scene.physics.add.collider(scene.player, scene.dungeonMap.collidingCells[i]);
-      scene.dungeonMap.collidingCells[i].setImmovable(true);
-    }
-  }
-  collide(player, cell){
-    console.log('boop');
-  }
-
 }
