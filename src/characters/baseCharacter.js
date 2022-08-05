@@ -11,7 +11,7 @@ import Phaser from 'phaser'
 export default class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
 	constructor(scene, x, y, texture, dH, dW, weapon, armor, kbS, aCd) {
 		super(scene, x, y, texture);
-		this.scene = scene
+		this.scene = scene;
 
 		//sprite attributes*********************************************************
 		this.displayWidth= dW;
@@ -116,7 +116,7 @@ export default class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
 			}	else {
 				toSpawn = group.create(coordX, coordY, spawnSprite);
 				scene.physics.add.collider(player, toSpawn, toSpawn.onFight, null, this);
-				scene.physics.add.collider(toSpawn, scene.walls)
+				scene.physics.add.collider(toSpawn, scene.walls);
 			}
 		}
 	}
@@ -124,7 +124,7 @@ export default class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
 		if(scene.traps.countActive(true)<spawnThreshold) {
 			//let trapId = Math.round(Math.random()*trapList.length);
 			// let texture = traplist[trapId].texture;
-			let texture = "trap"
+			let texture = "trap";
 			// generate a trap in a random cell in the world--------------------------
 			let randCell = Math.round(Math.random()*scene.dungeonMap.spawnCells.length);
 			let xCoord = scene.dungeonMap.spawnCells[randCell].x;

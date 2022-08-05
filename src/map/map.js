@@ -43,8 +43,8 @@ export default class DungeonMap {
     function makeGrid(dungeon, scene) {
       for (var r = 0; r < dungeon.rows; r++) {
         for (var c = 0; c < dungeon.cols; c++) {
-          var y = c*dungeon.w
-          var x = r*dungeon.w
+          var y = c*dungeon.w;
+          var x = r*dungeon.w;
           var cell = new Cell(scene, x, y, 'empty', c, r);
           dungeon.grid.push(cell);
         }
@@ -98,10 +98,10 @@ export default class DungeonMap {
 
         //if they have not collided---------------------------------------------
         if(dungeon.collide == false) {
-          dungeon.rooms.push(room) //add room to the array
+          dungeon.rooms.push(room); //add room to the array
           if(i>0) { //make corridors
-            hCorridor(dungeon, dungeon.rooms[i-1].center[0], room.center[0], dungeon.rooms[i-1].center[1], room.center[1])
-            vCorridor(dungeon, dungeon.rooms[i-1].center[0], room.center[0], dungeon.rooms[i-1].center[1], room.center[1])
+            hCorridor(dungeon, dungeon.rooms[i-1].center[0], room.center[0], dungeon.rooms[i-1].center[1], room.center[1]);
+            vCorridor(dungeon, dungeon.rooms[i-1].center[0], room.center[0], dungeon.rooms[i-1].center[1], room.center[1]);
           }
         }
       }
@@ -111,17 +111,17 @@ export default class DungeonMap {
     //horizontal corridor creator-----------------------------------------------
     function hCorridor(dungeon, x1,x2,y1,y2) {
       if(x1 > x2) {//if the first room is further towards the right then the second one
-        dungeon.disX = x1-x2 //find the distance between rooms
-        dungeon.disX += 1
+        dungeon.disX = x1-x2; //find the distance between rooms
+        dungeon.disX += 1;
 
         for (var i = 0; i < dungeon.grid.length; i++) {
-          dungeon.grid[i].carveH(dungeon, dungeon.disX, x2, y2)//carve out the corridor
+          dungeon.grid[i].carveH(dungeon, dungeon.disX, x2, y2);//carve out the corridor
         }
       } else { //if the second room is further towards the right then the first one
-        dungeon.disX = x2 - x1 //find the distance between rooms
-        dungeon.disX += 1
+        dungeon.disX = x2 - x1; //find the distance between rooms
+        dungeon.disX += 1;
         for (var i = 0; i < dungeon.grid.length; i++) {
-          dungeon.grid[i].carveH(dungeon, dungeon.disX, x1, y1)//carve out corridor
+          dungeon.grid[i].carveH(dungeon, dungeon.disX, x1, y1);//carve out corridor
         }
       }
     }
@@ -131,31 +131,31 @@ export default class DungeonMap {
       var x;
 
       if(y1 > y2) {//if the first room is further towards the bottom then the second one
-        dungeon.disY = y1-y2 //find the distance between rooms
-        dungeon.disY += 1
+        dungeon.disY = y1-y2; //find the distance between rooms
+        dungeon.disY += 1;
 
         if(x2+(dungeon.disX-1) > x1+(dungeon.disX-1)) {//find the correct x coord
-          x = x2
+          x = x2;
         } else {
-          x = x2+(dungeon.disX-1)
+          x = x2+(dungeon.disX-1);
         }
 
         for(var i = 0; i < dungeon.grid.length; i++) {
-          dungeon.grid[i].carveV(dungeon,dungeon.disY, x, y2)//carve out corridor
+          dungeon.grid[i].carveV(dungeon,dungeon.disY, x, y2); //carve out corridor
         }
       } else{ //if the second room is further towards the bottom then the first one
 
-        dungeon.disY = y2 - y1 //find the distance between rooms
-        dungeon.disY += 1
+        dungeon.disY = y2 - y1; //find the distance between rooms
+        dungeon.disY += 1;
 
         if(x1+(dungeon.disX-1) > x2+(dungeon.disX-1)) {//find the correct x coord
-          x = x1
+          x = x1;
         } else {
-          x = x1+(dungeon.disX-1)
+          x = x1+(dungeon.disX-1);
         }
 
         for (var i = 0; i < dungeon.grid.length; i++) {
-          dungeon.grid[i].carveV(dungeon, dungeon.disY, x, y1)//carve out corridor
+          dungeon.grid[i].carveV(dungeon, dungeon.disY, x, y1); //carve out corridor
         }
       }
     }
@@ -173,8 +173,8 @@ export default class DungeonMap {
     }
 
     // initiate methods*********************************************************
-    makeGrid(this, scene)//make map
-    createRooms(this)//make rooms
-    draw(this, scene)//update
+    makeGrid(this, scene); //make map
+    createRooms(this); //make rooms
+    draw(this, scene); //update
   }
 }

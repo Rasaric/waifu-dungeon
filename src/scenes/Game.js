@@ -35,10 +35,10 @@ export default class Game extends Phaser.Scene {
 
     //import floor sprite-------------------------------------------------------
     //this.add.image(600, 430, 'floor');
-    this.dungeonMap = new DungeonMap(64, 100, 100, 10, 8, 5, 2)
+    this.dungeonMap = new DungeonMap(64, 100, 100, 10, 8, 5, 2);
     //dungW, dungRows, dungCols, dungAmount, dungSize, dungSizeMin, dungCorridorW
     this.dungeonMap.onGenerate(this);
-    let randRoom = Math.floor(Math.random()*this.dungeonMap.rooms.length)
+    let randRoom = Math.floor(Math.random()*this.dungeonMap.rooms.length);
 
     let coordX=this.dungeonMap.rooms[randRoom].x+Math.floor(Math.random()*(this.dungeonMap.rooms[randRoom].w));
     let coordY=this.dungeonMap.rooms[randRoom].y+Math.floor(Math.random()*(this.dungeonMap.rooms[randRoom].h));
@@ -50,9 +50,6 @@ export default class Game extends Phaser.Scene {
 
     // //single grunt for testing
     // this.grunt = new Grunt(this, coordX, coordY+100, 'grunt',64 , 64, 'rusty sword', 'tattered robes', 10);
-    // this.trap = new Trap(this, this.player.x, this.player.y+100, 'trap', 64 , 64, 'traffic cone', 20);
-    // this.trap.setImmovable(true);
-    // this.physics.add.collider(this.player, this.trap, this.trap.onFight, null, this.trap);
 
     //enemies-------------------------------------------------------------------
     this.grunts = this.physics.add.group({ classType: Grunt });
@@ -68,7 +65,7 @@ export default class Game extends Phaser.Scene {
     this.player.controls(this.keys, this.spacebar, this.player);
 
     //spawn check --------------------------------------------------------------
-    this.player.trapGeneration(this, 10);
+    this.player.trapGeneration(this, 100);
     this.player.spawn(this, this.grunts, this.player, this.grunt, 'grunt', 50, 300, 2000);
     this.player.spawn(this, this.soldiers, this.player, this.soldier, 'grunt', 20, 500, 3000);
     this.player.spawn(this, this.bosses, this.player, this.boss, 'grunt', 1, 1500, 4000);
