@@ -25,6 +25,8 @@ export default class Character extends BaseCharacter {
 		this.damage = 4;
 		this.armor = 1;
 
+		this.setDepth(3);
+
 	}
 
 	/*character Methods**********************************************************/

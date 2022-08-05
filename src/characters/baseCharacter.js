@@ -101,8 +101,8 @@ export default class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
 			let randRoom = Math.floor(Math.random()*scene.dungeonMap.rooms.length);
 
 			// generate coordinates from room-----------------------------------------
-			let coordX=scene.dungeonMap.rooms[randRoom].x+Math.floor(Math.random()*(scene.dungeonMap.rooms[randRoom].w));
-			let coordY=scene.dungeonMap.rooms[randRoom].y+Math.floor(Math.random()*(scene.dungeonMap.rooms[randRoom].h));
+			let coordX=scene.dungeonMap.rooms[randRoom].x+Math.floor(Math.random()*((scene.dungeonMap.rooms[randRoom].w/scene.dungeonMap.w)-1))*scene.dungeonMap.w;
+			let coordY=scene.dungeonMap.rooms[randRoom].y+Math.floor(Math.random()*((scene.dungeonMap.rooms[randRoom].h/scene.dungeonMap.w)-1))*scene.dungeonMap.w;
 
 			// if out of bounds--------------------------------------------------------
 			if (coordX <= 0 || coordY <= 0 || coordX >= (scene.dungeonMap.cols*scene.dungeonMap.w) || coordY >= (scene.dungeonMap.cols*scene.dungeonMap.w)){
@@ -129,6 +129,12 @@ export default class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
 			let randCell = Math.round(Math.random()*scene.dungeonMap.spawnCells.length);
 			let xCoord = scene.dungeonMap.spawnCells[randCell].x;
 			let yCoord = scene.dungeonMap.spawnCells[randCell].y;
+
+			//prevent from spawning inside player cell on generation------------------
+			if(xCoord == scene.player.x && yCoord == scene.player.y){
+				return;
+			}
+
 			scene.trap = scene.traps.create(xCoord, yCoord, texture);
 
 			// set trap properties----------------------------------------------------
