@@ -31,6 +31,7 @@ export default class DungeonMap {
     this.disY; //distance y between rooms
     this.corridorW = dungCorridorW //corridor width
     this.collidingCells = [];
+    this.spawnCells = [];
   }
 
 //Generation Method*************************************************************

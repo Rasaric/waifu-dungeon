@@ -47,8 +47,9 @@ export default class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
 			return;
 		}	else {
 			attacker.cooldown = true;
-			this.scene.time.addEvent({ delay: this.attackCooldown, callback: () => {attacker.cooldown=false}, callbackScope: this });
+			this.scene.time.addEvent({ delay: attacker.attackCooldown, callback: () => {attacker.cooldown=false; console.log('can attack again');}, callbackScope: this });
 		}
+
 		//knockback-----------------------------------------------------------------
 		target.isKnockedback = true;
 		target.setVelocity(0);
@@ -95,7 +96,7 @@ export default class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
 
 	// spawn all the enemies------------------------------------------------------
 	spawn(scene, group, player, toSpawn, spawnSprite, spawnThreshold, spawnDistanceMin, spawnDistanceMax) {
-		if(group.countActive(true)<=spawnThreshold) {
+		if(group.countActive(true)<spawnThreshold) {
 			//random room-------------------------------------------------------------
 			let randRoom = Math.floor(Math.random()*scene.dungeonMap.rooms.length);
 
@@ -117,6 +118,23 @@ export default class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
 				scene.physics.add.collider(player, toSpawn, toSpawn.onFight, null, this);
 				scene.physics.add.collider(toSpawn, scene.walls)
 			}
+		}
+	}
+	trapGeneration(scene, spawnThreshold){
+		if(scene.traps.countActive(true)<spawnThreshold) {
+			//let trapId = Math.round(Math.random()*trapList.length);
+			// let texture = traplist[trapId].texture;
+			let texture = "trap"
+			// generate a trap in a random cell in the world--------------------------
+			let randCell = Math.round(Math.random()*scene.dungeonMap.spawnCells.length);
+			let xCoord = scene.dungeonMap.spawnCells[randCell].x;
+			let yCoord = scene.dungeonMap.spawnCells[randCell].y;
+			scene.trap = scene.traps.create(xCoord, yCoord, texture);
+
+			// set trap properties----------------------------------------------------
+			scene.trap.weapon = 'neurotoxin';
+			scene.trap.setImmovable(true);
+			scene.physics.add.overlap(scene.player, scene.traps, scene.trap.onFight, null, this);
 		}
 	}
 }
