@@ -149,7 +149,24 @@ export default class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
 			let randRoom = Math.floor(Math.random()*scene.dungeonMap.rooms.length);
 			let coordX=scene.dungeonMap.rooms[randRoom].x+Math.round(Math.random()*((scene.dungeonMap.rooms[randRoom].w/scene.dungeonMap.w)-1))*scene.dungeonMap.w;
 			let coordY=scene.dungeonMap.rooms[randRoom].y+Math.round(Math.random()*((scene.dungeonMap.rooms[randRoom].h/scene.dungeonMap.w)-1))*scene.dungeonMap.w;
-			
+
+			//place chest in along walls
+			let randomWall = Math.floor(Math.random()*3);
+			switch (randomWall) {
+				case 0:
+					coordX = scene.dungeonMap.rooms[randRoom].x;
+					break;
+				case 1:
+					coordY = scene.dungeonMap.rooms[randRoom].y;
+					break;
+				case 2:
+					coordX = ((scene.dungeonMap.rooms[randRoom].w/scene.dungeonMap.w)-1)*scene.dungeonMap.w;
+					break;
+				case 3:
+					coordY = ((scene.dungeonMap.rooms[randRoom].h/scene.dungeonMap.w)-1)*scene.dungeonMap.h;
+					break;
+			}
+
 			// add to physics group-----------------------------------------------------
 			scene.chest = scene.chests.create(coordX, coordY, 'chest');
 

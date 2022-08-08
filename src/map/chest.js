@@ -35,8 +35,10 @@ export default class Chest extends Phaser.Physics.Arcade.Sprite {
 		if (chest.open == true) {
 			return;
 		} else {
-			player.inventory.push(chest.loot);
-			console.log(`${player.name} recieved ${chest.loot[0].name} and some cringe shit` );
+			for (let i=0; chest.loot.length>i; i++){
+				player.inventory.push(chest.loot[i])
+				console.log(`${player.name} recieved ${chest.loot[i].name}` );
+			}
 			chest.setTexture('open-chest');
 			chest.open = true;
 		}

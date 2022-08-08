@@ -4,433 +4,390 @@
             "name": "Gun",
             "url": "https://cdn.discordapp.com/attachments/652639923530104852/768280007738130482/1-g3941.png",
             "combat": 3,
-            "hp": 0,
             "dodge": 0,
-            "pure": 0,
-            "flavor": "God made man, Sam Colt made men equal",
-            "steath": 0,
-            "peception": 0,
-            "lewd": 0
+            "damage": 4,
+            "armor": 0,
+            "flavor": "God made man, Sam Colt made men equal"
+
         },
         {
             "name": "Cute Panties",
             "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ26OxhF4OJbtC-rHzrj9kcXgBxWszFQDpUv1INnR9QZ_qvve3F",
             "combat": 0,
-            "hp": 1,
-            "dodge": 0,
-            "pure": 0,
-            "flavor": "perfectly clean and comfy",
-            "steath": 0,
-            "peception": 0,
-            "lewd": 3
+            "dodge": 2,
+            "damage": 0,
+            "armor": 1,
+            "flavor": "perfectly clean and comfy"
+
         },
         {
             "name": "Bra",
             "url": "https://pics.me.me/he-bra-am-i-doing-this-correctly-34469762.png",
             "combat": 0,
-            "hp": 2,
-            "dodge": 0,
-            "pure": 0,
-            "flavor": "it perfectly fits your waifu's soft, perky boobs",
-            "steath": 0,
-            "peception": 0,
-            "lewd": 2
+            "dodge": 2,
+            "damage": 0,
+            "armor": 1,
+            "flavor": "it perfectly fits your waifu's soft, perky boobs"
+
         },
         {
             "name": "Virginity Shield",
             "url": "https://cdn.discordapp.com/attachments/652639923530104852/688028412522135570/f84.png",
             "combat": 0,
-            "hp": 2,
             "dodge": 2,
-            "pure": 10,
-            "flavor": "will keep your waifu pure!",
-            "steath": 0,
-            "peception": 0,
-            "lewd": -1
+            "damage": 0,
+            "armor": 3,
+            "flavor": "will keep your waifu pure!"
+
         },
         {
             "name": "Dildo, but it's also a sword",
             "url": "https://netrinoimages.s3.eu-west-2.amazonaws.com/2017/12/02/480698/220793/dildo_sword_3d_model_c4d_max_obj_fbx_ma_lwo_3ds_3dm_stl_2315136_o.png",
             "combat": 2,
-            "hp": 0,
             "dodge": 0,
-            "pure": 0,
-            "flavor": "for all kinds of offense",
-            "steath": 0,
-            "peception": 0,
-            "lewd": 2
+            "damage": 2,
+            "armor": 0,
+            "flavor": "for all kinds of offense"
+
         },
         {
             "name": "Sword",
             "url": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Trp-Sword-14226124129-v06.png",
             "combat": 2,
-            "hp": 0,
             "dodge": 0,
-            "pure": 0,
-            "flavor": "an elegant weapon, from an uncivilized age",
-            "steath": 0,
-            "peception": 0,
-            "lewd": 0
+            "damage": 5,
+            "armor": 0,
+            "flavor": "an elegant weapon, from an uncivilized age"
+
         },
         {
             "name": "Two Swords!",
             "url": "https://cdn.discordapp.com/attachments/652639923530104852/688028846976663599/dual-ninja-sword-set-4062986.png",
             "combat": 2,
-            "hp": 0,
             "dodge": 1,
-            "pure": 0,
+            "damage": 5,
+            "armor": 0,
             "flavor": "now you look dangerous AND cool",
-            "steath": 0,
-            "peception": 0,
-            "lewd": 1
+            "attackCooldown": -200
+
         },
         {
             "name": "Three Swords?",
             "url": "https://www.pngitem.com/pimgs/m/2-23584_one-piece-zoro-three-sword-style-hd-png.png",
             "combat": 1,
-            "hp": 0,
             "dodge": 1,
-            "pure": 0,
-            "flavor": "why would you use them all at once!? just grab one!",
-            "steath": 0,
-            "peception": 0,
-            "lewd": 0
+            "damage": 5,
+            "armor": 0,
+            "flavor": "why would you use them all at once!? just grab one!"
+
         },
         {
             "name": "Strap-on",
             "url": "https://cdn1.images.cartoonpornvideos.com/videos/0499/15299/main_2.jpg",
             "combat": 2,
-            "hp": 0,
             "dodge": 1,
-            "pure": -2,
-            "flavor": "will keep most enemies away, except lesbians",
-            "steath": -1,
-            "peception": 0,
-            "lewd": 2
+            "damage": 3,
+            "armor": 0,
+            "flavor": "will keep most enemies away, except lesbians"
+
         },
         {
             "name": "Big ass Sword",
             "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTjr0OFTiVjORVHoiSfnIv91YJ0lQROnUdsl6lzQJCVR705NpVY",
             "combat": 3,
-            "hp": 0,
             "dodge": -1,
-            "pure": -1,
-            "flavor": "Big, thick, long and hard. just as she likes it",
-            "steath": -2,
-            "peception": 0,
-            "lewd": 0
+            "damage": 6,
+            "armor": 0,
+            "flavor": "Big, thick, long and hard. just as she likes it"
+
         },
         {
             "name": "Bow",
             "url": "https://www.pngitem.com/pimgs/m/74-748038_cool-bow-and-arrow-anime-for-kids-cool.png",
             "combat": 2,
-            "hp": 0,
             "dodge": 1,
-            "pure": 0,
-            "flavor": "like a gun, but not a gun",
-            "steath": 1,
-            "peception": 0,
-            "lewd": 1
+            "damage": 4,
+            "armor": 0,
+            "flavor": "like a gun, but not a gun"
+
         },
         {
             "name": "The one Ring",
             "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Unico_Anello.png/1200px-Unico_Anello.png",
             "combat": 0,
-            "hp": 0,
             "dodge": 5,
-            "pure": 0,
-            "flavor": "One Ring to rule them all, One Ring to find them, One Ring to bring them all, and in the darkness bind them. DISCLAIMER: not a cock ring.",
-            "steath": 5,
-            "peception": 0,
-            "lewd": 0
+            "damage": 0,
+            "armor": 0,
+            "flavor": "One Ring to rule them all, One Ring to find them, One Ring to bring them all, and in the darkness bind them. DISCLAIMER: not a cock ring."
+
         },
         {
             "name": "Anal Beads",
             "url": "https://images-na.ssl-images-amazon.com/images/I/61t44GZnIZL._AC_SX355_.jpg",
             "combat": 0,
-            "hp": 0,
             "dodge": -1,
-            "pure": 0,
-            "flavor": "will keep one of your waifu's most vulnerable parts protected, but restricts her movement",
-            "steath": 0,
-            "peception": 0,
-            "lewd": 3
+            "damage": 0,
+            "armor": 4,
+            "flavor": "will keep one of your waifu's most vulnerable parts protected, but restricts her movement"
+
         },
         {
             "name": "Sexy Lingerie",
             "url": "https://i.kym-cdn.com/photos/images/facebook/001/339/577/846.jpg",
             "combat": 0,
-            "hp": 0,
             "dodge": 2,
-            "pure": -2,
-            "flavor": "almost like wearing nothing, surprisingly lewder than that.",
-            "steath": 0,
-            "peception": 0,
-            "lewd": 3
+            "damage": 0,
+            "armor": 1,
+            "flavor": "almost like wearing nothing, surprisingly lewder than that."
+
         },
         {
             "name": "Cat Ears",
             "url": "https://p7.hiclipart.com/preview/226/90/464/catgirl-manga-anime-monogatari-series-cat-ears.jpg",
             "combat": 0,
-            "hp": 0,
-            "dodge": 0,
-            "pure": 0,
-            "flavor": "*does not replace a waifu's hearing. may flicker from time to time, nya",
-            "steath": 0,
-            "peception": 2,
-            "lewd": 2
+            "dodge": 1,
+            "damage": 0,
+            "armor": 1,
+            "flavor": "*does not replace a waifu's hearing. may flicker from time to time, nya"
+
         },
         {
             "name": "Kanohi Hau",
             "url": "https://vignette.wikia.nocookie.net/bionicle/images/5/50/Gran_Hau.PNG/revision/latest/scale-to-width-down/340?cb=20170405020103&path-prefix=es",
             "combat": 0,
-            "hp": 2,
             "dodge": 3,
-            "pure": 0,
-            "flavor": "will protect your waifu from physical threats. and makes her just a tad more hot.",
-            "steath": 0,
-            "peception": 0,
-            "lewd": 1
+            "damage": 0,
+            "armor": 0,
+            "flavor": "will protect your waifu from physical threats. and makes her just a tad more hot."
+
         },
         {
             "name": "Boina de Hugo Chavez",
             "url": "https://cdn.discordapp.com/attachments/652639923530104852/688031945908551787/13DEj-vahoSXW-kNbkPiQsAAtAdx0q4ak0fW7xG-SHrODG-NXtkY88JUx2se7zrTzHtGbM_3uX67fJSD3ae_JlrrpVm0YiruaPlB.png",
             "combat": 0,
-            "hp": 0,
             "dodge": 0,
-            "pure": -1,
-            "flavor": "hasta la victoria, siempre",
-            "steath": -2,
-            "peception": 0,
-            "lewd": 2
+            "damage": 0,
+            "armor": 0,
+            "flavor": "hasta la victoria, siempre"
+
         },
         {
             "name": "Minecraft Diamond Sword",
             "url": "https://cdn2.iconfinder.com/data/icons/minecraft-and-pixels/32/minecraft-03-512.png",
             "combat": 3,
-            "hp": 0,
             "dodge": 0,
-            "pure": 0,
-            "flavor": "aw, man",
-            "steath": 0,
-            "peception": 0,
-            "lewd": 0
+            "damage": 5,
+            "armor": 0,
+            "flavor": "aw, man"
+
         },
         {
             "name": "Love Nectar",
             "url": "https://pm1.narvii.com/5812/96ce8e2ccac8df9ea5dbd5634a062b8a635dcf23_hq.jpg",
             "combat": 0,
-            "hp": 0,
-            "dodge": 0,
-            "pure": -1,
-            "flavor": "unsure what this is, but it smells very sweet.",
-            "steath": -2,
-            "peception": 0,
-            "lewd": 4
+            "dodge": 3,
+            "damage": 0,
+            "armor": 0,
+            "flavor": "unsure what this is, but it smells very sweet."
+
         },
         {
             "name": "HEAVY MACHINEGUN",
             "url": "https://i.redd.it/0slg475izhh41.jpg",
             "combat": 4,
-            "hp": 0,
             "dodge": -1,
-            "pure": 0,
-            "flavor": "enough firepower to stop an alien invasion",
-            "steath": 0,
-            "peception": 0,
-            "lewd": 2
+            "damage": 6,
+            "armor": 0,
+            "flavor": "enough firepower to stop an alien invasion"
+
         },
         {
             "name": "Powered Armor",
             "url": "https://i.pinimg.com/originals/93/ac/e6/93ace6e8714e0d391c361dc31298e723.jpg",
             "combat": 2,
-            "hp": 3,
             "dodge": 3,
-            "pure": 3,
-            "flavor": "unbelievably fast, this armor will keep your waifu safe from harm.",
-            "steath": -2,
-            "peception": 0,
-            "lewd": 0
+            "damage": 0,
+            "armor": 5,
+            "flavor": "unbelievably fast, this armor will keep your waifu safe from harm."
+
         },
         {
             "name": "Chastity Belt",
             "url": "https://i.ebayimg.com/images/g/2v8AAOSwjvJZTHmk/s-l300.jpg",
             "combat": 0,
-            "hp": 1,
             "dodge": 1,
-            "pure": -2,
-            "flavor": "contrary to what the name implies, this belt will make your waifu lewder, and more likely to be seduced by anyone willing to unlock it. also gives a small defense bonus.",
-            "steath": 0,
-            "peception": 0,
-            "lewd": 0
+            "damage": 0,
+            "armor": -2,
+            "flavor": "contrary to what the name implies, this belt will make your waifu lewder, and more likely to be seduced by anyone willing to unlock it. also gives a small defense bonus."
+
         },
         {
             "name": "Glasses",
             "url": "https://4.bp.blogspot.com/-pPFl28maoTk/XXCYThJiT7I/AAAAAAAAMzM/vh-R7K2godA0KdV8y6kjT1ZGhe35HF3zACLcBGAs/w914-h514-p-k-no-nu/anime-girl-glasses-student-school-uniform-uhdpaper.com-4K-4.636-wp.thumbnail.jpg",
             "combat": 0,
-            "hp": 0,
-            "dodge": 1,
-            "pure": 2,
-            "flavor": "Helps your waifu see attacks coming, and she looks very cute in them.",
-            "steath": 0,
-            "peception": 3,
-            "lewd": 1
+            "dodge": 2,
+            "damage": 0,
+            "armor": 0,
+            "flavor": "Helps your waifu see attacks coming, and she looks very cute in them."
+
         },
         {
             "name": "Sharp as fuck Nails",
             "url": "https://cdn.discordapp.com/attachments/652639923530104852/688033395359481866/RGZVNiSQBY-h4nVxYB7yPO-PUcBVUWycglD3gmctdM14rWq-HmpE5MTqc26FHjRwdTVm1j9BnOf3h9D7WMsfkbKjjHcBn_JJApab.png",
             "combat": 4,
-            "hp": 0,
             "dodge": 0,
-            "pure": 3,
-            "flavor": "great for combat, amazing for scratching, terrible for more intimate stuff",
-            "steath": 0,
-            "peception": 0,
-            "lewd": -2
+            "damage": 3,
+            "armor": 0,
+            "flavor": "great for combat, amazing for scratching, terrible for more intimate stuff"
+
         },
         {
             "name": "Bad Dragon Dildo",
             "url": "https://i.pinimg.com/originals/f5/ae/08/f5ae0832a427e1625c6c695d6924a071.jpg",
             "combat": 1,
-            "hp": 0,
             "dodge": 0,
-            "pure": -2,
-            "flavor": "just a tad thicker than what she is used to. but that won't stop her",
-            "steath": 0,
-            "peception": 0,
-            "lewd": 3
+            "damage": 3,
+            "armor": 0,
+            "flavor": "just a tad thicker than what she is used to. but that won't stop her"
+
         },
         {
             "name": "Cute Hair Bow",
             "url": "https://i.pinimg.com/originals/11/78/3f/11783f2ca161cc6f90d2cc0533148787.png",
             "combat": 0,
-            "hp": 0,
-            "dodge": 0,
-            "pure": 3,
-            "flavor": "CUTE! *CUUUUTE!*",
-            "steath": -1,
-            "peception": 0,
-            "lewd": 0
+            "dodge": 3,
+            "damage": 0,
+            "armor": 0,
+            "flavor": "CUTE! *CUUUUTE!*"
+
         },
         {
             "name": "Jarate",
             "url": "https://wiki.teamfortress.com/w/images/thumb/3/38/Jarate.png/250px-Jarate.png",
             "combat": 2,
-            "hp": 0,
             "dodge": 2,
-            "pure": 0,
-            "flavor": "gives a solid combat advantage, and enemies are less likely to aproach you due to the smell.",
-            "steath": 0,
-            "peception": 0,
-            "lewd": 0
+            "damage": 0,
+            "armor": 0,
+            "flavor": "gives a solid combat advantage, and enemies are less likely to aproach you due to the smell."
+
         },
         {
             "name": "Wedding Dress",
             "url": "https://i.pinimg.com/236x/19/18/8b/19188b616492ad2d176630c06c994e60.jpg",
             "combat": 0,
-            "hp": 0,
             "dodge": -1,
-            "pure": 3,
-            "flavor": "she's ready to wear this once and never again",
-            "steath": -2,
-            "peception": 0,
-            "lewd": 0
+            "damage": 0,
+            "armor": 0,
+            "flavor": "she's ready to wear this once and never again"
+
         },
         {
             "name": "Bear Hands",
             "url": "https://i.imgflip.com/p3vaq.jpg",
             "combat": 3,
-            "hp": 2,
             "dodge": 0,
-            "pure": 0,
-            "flavor": "it's her right(and left hand) after all",
-            "steath": 0,
-            "peception": 0,
-            "lewd": 0
+            "damage": 0,
+            "armor": 0,
+            "flavor": "it's her right(and left hand) after all"
+
         },
         {
             "name": "Stick",
             "url": "https://www.toyhalloffame.org/sites/www.toyhalloffame.org/files/toys/square/stick_0.png",
             "combat": 1,
-            "hp": 0,
             "dodge": 0,
-            "pure": 0,
-            "flavor": "just a good ol' stick",
-            "steath": 0,
-            "peception": 0,
-            "lewd": 0
+            "damage": 0,
+            "armor": 0,
+            "flavor": "just a good ol' stick"
+
         },
         {
             "name": "Finger Gun",
             "url": "https://i.redd.it/su97jtg6mnh21.jpg",
             "combat": 2,
-            "hp": 0,
             "dodge": 0,
-            "pure": 0,
-            "flavor": "Now you mean business",
-            "steath": 0,
-            "peception": 0,
-            "lewd": 0
+            "damage": 0,
+            "armor": 0,
+            "flavor": "Now you mean business"
+
         },
         {
             "name": "The BFG",
             "url": "https://doomwiki.org/w/images/thumb/7/7f/Codex_bfg.bimage.png/300px-Codex_bfg.bimage.png",
             "combat": 5,
-            "hp": 0,
             "dodge": -1,
-            "pure": 0,
-            "flavor": "Rip and Tear",
-            "steath": 0,
-            "peception": 0,
-            "lewd": 0
+            "damage": 0,
+            "armor": 0,
+            "flavor": "Rip and Tear"
+
         },
         {
             "name": "Bear Kigurumi",
             "url": "https://www.kindpng.com/picc/m/199-1992314_anime-girl-clipart-bear-hd-png-download.png",
             "combat": 0,
-            "hp": 1,
             "dodge": 0,
-            "pure": 2,
-            "flavor": "dangerously cute",
-            "steath": 0,
-            "peception": 0,
-            "lewd": 0
+            "damage": 0,
+            "armor": 2,
+            "flavor": "dangerously cute"
+
         },
         {
             "name": "Running Shoes",
             "url": "https://picture-cdn.wheretoget.it/ld8uho-l-610x610-shoes-sneakers-colorful-colors-bright+colored-bright-nike-nike+running+shoes-fashion-maluhii-maluhii+sport-maluhii+trainers-neon+colorful+nike+shoes-colours-sparkle-yellow-orange.jpg",
             "combat": 0,
-            "hp": 0,
             "dodge": 2,
-            "pure": 0,
-            "flavor": "flexible, confortable, bright and ugly",
-            "steath": 0,
-            "peception": 0,
-            "lewd": 0
+            "damage": 0,
+            "armor": 0,
+            "flavor": "you better run, better run, faster than their bullets"
+
         },
         {
             "name": "jet suit",
             "url": "https://cdn.myanimelist.net/s/common/uploaded_files/1450783329-f641469292840b68a57ef4a4c90f66eb.jpeg",
             "combat": 0,
-            "hp": 1,
             "dodge": 3,
-            "pure": 0,
-            "flavor": "Increases speed greatly. not as solid as a full exosuit",
-            "steath": 0,
-            "peception": 0,
-            "lewd": 0
+            "damage": 0,
+            "armor": 0,
+            "flavor": "Increases speed greatly. not as solid as a full exosuit"
+
         },
         {
-          "name": "Axe"
+          "name": "Axe",
+          "url": "",
+          "combat": 0,
+          "dodge": 0,
+          "damage": 5,
+          "armor": 0,
+          "flavor": "Excuse me, I must persue an inquiry"
+
         },
         {
-          "name": "Whip"
+          "name": "Whip",
+          "url": "",
+          "combat": 0,
+          "dodge": 0,
+          "damage": 3,
+          "armor": 0,
+          "flavor": "it good"
+
         },
         {
-          "name": "Dildo"
+          "name": "Dildo",
+          "url": "",
+          "combat": 0,
+          "dodge": 0,
+          "damage": 1,
+          "armor": 0,
+          "flavor": "now with flesh-like texture!"
         },
         {
-          "name": "Lego Brick"
+          "name": "Lego Brick",
+          "url": "",
+          "combat": 0,
+          "dodge": 1,
+          "damage": 1,
+          "armor": 0,
+          "flavor": "the endless creativity you can unlock with multiple of these, unfortunately its only one."
         }
     ]
 }

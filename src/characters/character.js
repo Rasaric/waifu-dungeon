@@ -15,7 +15,7 @@ export default class Character extends BaseCharacter {
 		super(scene, x, y, texture, dH, dW, weapon, armor, kbS);
 		//attributes****************************************************************
 		//basic attributes
-		this.inventory = ['water bottle', 'eggs'];
+		this.inventory = [];
 		this.isAlive = true;
 
 		//stats
@@ -63,7 +63,16 @@ export default class Character extends BaseCharacter {
 			}
 			//open inventory
 			if(Phaser.Input.Keyboard.JustDown(keys.E)){
-				console.log('inventory screen:' + player.inventory);
+				if (this.inventory.length == 0) {
+					console.log('broke ass nigga got nothin');
+					return;
+				} else {
+					let invDump = [];
+					for (let i = 0; this.inventory.length > i; i++){
+						invDump.push(this.inventory[i].name);
+					}
+					console.log(`player has: ${invDump}`);
+				}
 			}
 		}
 
