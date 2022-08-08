@@ -58,6 +58,7 @@ export default class Game extends Phaser.Scene {
     this.bosses = this.physics.add.group({ classType: Boss });
     // enviroment --------------------------------------------------------------
     this.traps = this.physics.add.group({ classType: Trap });
+    this.chests = this.physics.add.group({ classType: Chest });
 
 
   }
@@ -68,6 +69,7 @@ export default class Game extends Phaser.Scene {
 
     //spawn check --------------------------------------------------------------
     this.player.trapGeneration(this, 50);
+    this.chest.chestGeneration(this, 30);
     this.player.spawn(this, this.grunts, this.player, this.grunt, 'grunt', 20, 300, 2000);
     this.player.spawn(this, this.soldiers, this.player, this.soldier, 'grunt', 10, 500, 3000);
     this.player.spawn(this, this.bosses, this.player, this.boss, 'grunt', 1, 1500, 4000);

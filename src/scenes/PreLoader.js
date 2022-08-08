@@ -21,8 +21,10 @@ export default class PreLoader extends Phaser.Scene {
 		this.load.image('tile', 'images/tile.jpg');
 		this.load.image('empty', 'images/empty.jpg');
     this.load.image('player', 'images/warlord-helmet.png');
-		this.load.image('grunt', 'images/grunt.png')
-		this.load.image('trap', 'images/trap.png')
+		this.load.image('grunt', 'images/grunt.png');
+		this.load.image('trap', 'images/trap.png');
+		this.load.image('chest', 'images/chest.png');
+		this.load.image('open-chest', 'images/open-chest.png');
     }
 
     create() {
