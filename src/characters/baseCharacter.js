@@ -121,7 +121,7 @@ export default class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
 		}
 	}
 	trapGeneration(scene, spawnThreshold){
-		if(scene.traps.countActive(true)<spawnThreshold) {
+		while (scene.traps.countActive(true)<spawnThreshold) {
 			//let trapId = Math.round(Math.random()*trapList.length);
 			// let texture = traplist[trapId].texture;
 			let texture = "trap";
@@ -141,6 +141,22 @@ export default class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
 			scene.trap.weapon = 'neurotoxin';
 			scene.trap.setImmovable(true);
 			scene.physics.add.overlap(scene.player, scene.traps, scene.trap.onFight, null, this);
+		}
+	}
+	chestGeneration(scene, spawnThreshold){
+		while (scene.chests.countActive(true)<spawnThreshold) {
+			//generate on a random room-------------------------------------------------
+			let randRoom = Math.floor(Math.random()*scene.dungeonMap.rooms.length);
+			let coordX=scene.dungeonMap.rooms[randRoom].x+Math.round(Math.random()*((scene.dungeonMap.rooms[randRoom].w/scene.dungeonMap.w)-1))*scene.dungeonMap.w;
+			let coordY=scene.dungeonMap.rooms[randRoom].y+Math.round(Math.random()*((scene.dungeonMap.rooms[randRoom].h/scene.dungeonMap.w)-1))*scene.dungeonMap.w;
+			
+			// add to physics group-----------------------------------------------------
+			scene.chest = scene.chests.create(coordX, coordY, 'chest');
+
+			//add properties------------------------------------------------------------
+			scene.chest.onLootGen(scene, scene.chest);
+			scene.chest.setImmovable(true);
+			scene.physics.add.overlap(scene.player, scene.chest, scene.chest.onOpen, null, this);
 		}
 	}
 }

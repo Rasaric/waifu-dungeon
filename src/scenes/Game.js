@@ -14,6 +14,7 @@ import Soldier from '../enemies/soldier'
 import Boss from '../enemies/boss'
 //enviroment--------------------------------------------------------------------
 import Trap from '../enemies/trap'
+import Chest from '../map/chest'
 //map---------------------------------------------------------------------------
 import DungeonMap from '../map/map'
 
@@ -28,6 +29,9 @@ export default class Game extends Phaser.Scene {
   }
   //create**********************************************************************
   create() {
+    //load JSON data -----------------------------------------------------------
+    this.lootList = this.cache.json.get('loot')
+
     //populate keys-------------------------------------------------------------
     this.keys = this.input.keyboard.addKeys("W,A,S,D,E,F");
     this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
@@ -59,6 +63,8 @@ export default class Game extends Phaser.Scene {
     // enviroment --------------------------------------------------------------
     this.traps = this.physics.add.group({ classType: Trap });
     this.chests = this.physics.add.group({ classType: Chest });
+    this.player.trapGeneration(this, 50);
+    this.player.chestGeneration(this, 30);
 
 
   }
@@ -66,10 +72,8 @@ export default class Game extends Phaser.Scene {
   update() {
     //update inputs-------------------------------------------------------------
     this.player.controls(this.keys, this.spacebar, this.player);
-
     //spawn check --------------------------------------------------------------
-    this.player.trapGeneration(this, 50);
-    this.chest.chestGeneration(this, 30);
+
     this.player.spawn(this, this.grunts, this.player, this.grunt, 'grunt', 20, 300, 2000);
     this.player.spawn(this, this.soldiers, this.player, this.soldier, 'grunt', 10, 500, 3000);
     this.player.spawn(this, this.bosses, this.player, this.boss, 'grunt', 1, 1500, 4000);
