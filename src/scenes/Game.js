@@ -13,8 +13,9 @@ import Grunt from '../enemies/grunt'
 import Soldier from '../enemies/soldier'
 import Boss from '../enemies/boss'
 //enviroment--------------------------------------------------------------------
-import Trap from '../enemies/trap'
-import Chest from '../map/chest'
+import Trap from '../environment/trap'
+import Item from '../enviroment/item'
+import Chest from '../environment/chest'
 //map---------------------------------------------------------------------------
 import DungeonMap from '../map/map'
 
@@ -24,13 +25,22 @@ export default class Game extends Phaser.Scene {
   constructor()	{
     super('game')
   }
-  //preload
+  //preload*********************************************************************
   preload() {
   }
   //create**********************************************************************
   create() {
     //load JSON data -----------------------------------------------------------
-    this.lootList = this.cache.json.get('loot')
+    this.lootList = this.cache.json.get('loot');
+
+    // create item deck---------------------------------------------------------
+    this.lootDeck = [];
+    for (i = 0; this.lootList.length > i; i++) {
+      this.loot = new Item (this.lootList[i].name, this.lootList[i].url, this.lootList[i].combat, this.lootList[i].dodge, this.lootList[i].damage, this.lootList[i].armor, this.lootList[i].flavor);
+      this.lootDeck.push(this.loot);
+    }
+    console.log(lootDeck);
+
 
     //populate keys-------------------------------------------------------------
     this.keys = this.input.keyboard.addKeys("W,A,S,D,E,F");

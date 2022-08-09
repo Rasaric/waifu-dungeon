@@ -21,24 +21,27 @@ export default class Chest extends Phaser.Physics.Arcade.Sprite {
 
 	/*Chest Methods**************************************************************/
 	onLootGen(scene, chest){
-
+		//generate amount of loot in chest------------------------------------------
 		let lootAmount = Math.round(Math.random()*3)+1;
 
+		//draw an amount of loot from deck------------------------------------------
 		let i = 0
 		while (i<lootAmount){
-			let lootIndex = Math.round(Math.random()*scene.lootList.loot.length);
-			chest.loot.push(scene.lootList.loot[lootIndex]);
+			let lootIndex = Math.round(Math.random()*scene.lootDeck.length);
+			scene.lootDeck[lootIndex].onDraw(scene, scene.lootDeck[lootIndex]);
 			i++
 		}
 	}
 	onOpen(player, chest){
+		//if chest has already been opened, do nothing------------------------------
 		if (chest.open == true) {
 			return;
 		} else {
+			// add each item to player inventory--------------------------------------
 			for (let i=0; chest.loot.length>i; i++){
-				player.inventory.push(chest.loot[i])
-				console.log(`${player.name} recieved ${chest.loot[i].name}` );
+				player.inventory.addItem(chest.loot[i]);
 			}
+			// set chest to open------------------------------------------------------
 			chest.setTexture('open-chest');
 			chest.open = true;
 		}

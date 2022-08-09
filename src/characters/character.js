@@ -80,5 +80,6 @@ export default class Character extends BaseCharacter {
 	// add item to inventory------------------------------------------------------
 	addItem(item){
 		this.inventory.push(item);
+		console.log(`player obtained ${item}`);
 	}
 }
