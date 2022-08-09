@@ -17,6 +17,7 @@ import GameMaster from '../environment/gameMaster'
 import Trap from '../environment/trap'
 import Item from '../environment/item'
 import Chest from '../environment/chest'
+import Weapon from '../characters/weapon'
 //map---------------------------------------------------------------------------
 import DungeonMap from '../map/map'
 
@@ -68,7 +69,7 @@ export default class Game extends Phaser.Scene {
     // //set camera to follow character-----------------------------------------
     this.cameras.main.startFollow(this.player, true);
 
-    // //single grunt for testing
+    //single grunt for testing
     // this.grunt = new Grunt(this, coordX, coordY+100, 'grunt',64 , 64, 'rusty sword', 'tattered robes', 10);
 
     //enemies-------------------------------------------------------------------
@@ -78,8 +79,21 @@ export default class Game extends Phaser.Scene {
     // enviroment --------------------------------------------------------------
     this.traps = this.physics.add.group({ classType: Trap });
     this.chests = this.physics.add.group({ classType: Chest });
+
+    //weapon properties --------------------------------------------------------
+    this.weapons = this.physics.add.group({ classType: Weapon });
+    this.weapon = this.weapons.create(this.player.x, this.player.y-64, 'bare hands');
+    this.weapon.displayWidth = 64;
+    this.weapon.displayHeight = 64;
+    this.weapon.name = this.player.name;
+    this.weapon.setActive(false).setVisible(false);
+    //this.weapon = new Weapon(this.player.scene, this.player.x, this.player.y-64, this.player.weapon);
+    this.weapon.setImmovable(true);
+
+    // generate enviroment assets ----------------------------------------------
     this.gameMaster.trapGeneration(this, 50);
     this.gameMaster.chestGeneration(this, 30);
+
 
     // collisions --------------------------------------------------------------
     this.physics.add.collider(this.player, this.grunts, this.gameMaster.onFight, null, this);
@@ -92,18 +106,29 @@ export default class Game extends Phaser.Scene {
     // map collisions ----------------------------------------------------------
     this.physics.add.collider(this.player, this.walls);
     this.physics.add.collider(this.grunts, this.walls);
+    this.physics.add.collider(this.soldiers, this.walls);
+    this.physics.add.collider(this.bosses, this.walls);
+
+    //player combat ------------------------------------------------------------
+    this.physics.add.collider(this.grunts, this.weapons, this.gameMaster.onFight, null, this);
+    this.physics.add.overlap(this.soldiers, this.weapons, this.gameMaster.onFight, null, this);
+    this.physics.add.overlap(this.bosses, this.weapons, this.gameMaster.onFight, null, this);
+
+    // mob spawning ------------------------------------------------------------
+    while(this.grunts.countActive(true) < 20) {this.gameMaster.spawn(this, this.grunts, this.player, this.grunt, 'grunt', 300, 2000)};
+    while(this.soldiers.countActive(true) < 10) {this.gameMaster.spawn(this, this.soldiers, this.player, this.soldier, 'grunt', 500, 3000)};
+    while(this.bosses.countActive(true) < 1) {this.gameMaster.spawn(this, this.bosses, this.player, this.boss, 'grunt', 1500, 4000)};
 
 
   }
   //update game state***********************************************************
   update() {
+
     //update inputs-------------------------------------------------------------
-    this.player.controls(this.keys, this.spacebar, this.player);
+    this.player.controls(this.keys, this.spacebar, this);
     //spawn check --------------------------------------------------------------
 
-    this.gameMaster.spawn(this, this.grunts, this.player, this.grunt, 'grunt', 20, 300, 2000);
-    this.gameMaster.spawn(this, this.soldiers, this.player, this.soldier, 'grunt', 10, 500, 3000);
-    this.gameMaster.spawn(this, this.bosses, this.player, this.boss, 'grunt', 1, 1500, 4000);
+
 
   }
 }

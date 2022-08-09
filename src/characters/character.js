@@ -9,7 +9,7 @@ Character Constructor
 //required----------------------------------------------------------------------
 import Phaser from 'phaser'
 import BaseCharacter from '../characters/baseCharacter'
-
+import Weapon from '../characters/weapon'
 export default class Character extends BaseCharacter {
 	constructor(scene, x, y, texture, dH, dW, weapon, armor, kbS) {
 		super(scene, x, y, texture, dH, dW, weapon, armor, kbS);
@@ -24,7 +24,10 @@ export default class Character extends BaseCharacter {
 		this.dodge = 1;
 		this.damage = 4;
 		this.armor = 1;
-
+		this.equipped = "bare hands"
+		this.weapon = "bare hands"
+		this.rangeW = 64
+		this.rangeH = 64
 		this.setDepth(3);
 
 	}
@@ -32,33 +35,39 @@ export default class Character extends BaseCharacter {
 	/*character Methods**********************************************************/
 
 	//controls--------------------------------------------------------------------
-	controls(keys, space, player){
-		if (player.isKnockedback == true || player.isAlive == false){
+	controls(keys, space, scene){
+		if (scene.player.isKnockedback == true || scene.player.isAlive == false){
 			return;
 		} else {
-			player.setVelocity(0);
+			scene.player.setVelocity(0);
 			//horizontal movement
 			if (keys.A.isDown) {
-				player.setVelocityX(-600);
+				scene.player.setVelocityX(-600);
 			} else if (keys.D.isDown) {
-				player.setVelocityX(600);
+				scene.player.setVelocityX(600);
 			}
 			//vertical movement
 			if (keys.W.isDown) {
-				player.setVelocityY(-600);
+				scene.player.setVelocityY(-600);
 			} else if (keys.S.isDown) {
-				player.setVelocityY(600);
+				scene.player.setVelocityY(600);
 			}
 
 			//interaction*************************************************************
 			//attack------------------------------------------------------------------
 			if(Phaser.Input.Keyboard.JustDown(space)){
-				if (player.cooldown==true) {
+
+				if (scene.player.cooldown==true) {
 					return;
 				}	else {
-					player.cooldown = true;
-					player.onFight('you');
-					player.scene.scene.time.addEvent({ delay: 1000, callback: () => {player.cooldown=false}, callbackScope: this });
+					scene.player.cooldown = true;
+					scene.weapon.x = scene.player.x;
+					scene.weapon.y = scene.player.y-64;
+					scene.weapon.setActive(true).setVisible(true);
+					scene.time.addEvent({ delay: 1000, callback: () => {
+						scene.player.cooldown=false;
+						scene.weapon.setActive(false).setVisible(false);
+					}, callbackScope: this });
 				}
 			}
 			//open inventory----------------------------------------------------------

@@ -10,8 +10,8 @@ Game MAster Constructor
 import Phaser from 'phaser'
 export default class GameMaster {
 	constructor(scene) {
-    this.scene = scene;
-}
+		this.scene = scene;
+	}
 	/*Battle Methods*************************************************************/
 
 	//attack----------------------------------------------------------------------
@@ -20,13 +20,13 @@ export default class GameMaster {
 		if (attacker.cooldown==true || attacker.triggered==true) {
 			return;
 		}	else {
-      if (typeof attacker.triggered=="undefined"){
-        attacker.cooldown=true;
-        attacker.scene.time.addEvent({ delay: attacker.attackCooldown, callback: () => {attacker.cooldown=false; console.log(attacker.name + ' can attack again');}, callbackScope: this });
-      } else {
-      attacker.triggered = true;
-      }
-    }
+			if (typeof attacker.triggered=="undefined"){
+				attacker.cooldown=true;
+				attacker.scene.time.addEvent({ delay: attacker.attackCooldown, callback: () => {attacker.cooldown=false; console.log(attacker.name + ' can attack again');}, callbackScope: this });
+			} else {
+				attacker.triggered = true;
+			}
+		}
 
 		//knockback-----------------------------------------------------------------
 		target.isKnockedback = true;
@@ -50,20 +50,20 @@ export default class GameMaster {
 
 		//check values and resolve combat outcome-----------------------------------
 
-    //compare attack roll to defense roll
+		//compare attack roll to defense roll
 		if (atkRoll>defRoll) {
 
-      //calculate damage dealt--------------------------------------------------
+			//calculate damage dealt--------------------------------------------------
 			let damageDealt = damageRoll-target.armor;
 			if (damageDealt<=0) {
 
-        // if armor absorbs all damage------------------------------------------
+				// if armor absorbs all damage------------------------------------------
 				console.log(`${attacker.name} barely glanced ${target.name}'s ${target.armorName}`);
 			}	else {
-        // deal damage to health------------------------------------------------
+				// deal damage to health------------------------------------------------
 				target.health = target.health-damageDealt;
 
-        // if player dies ------------------------------------------------------
+				// if player dies ------------------------------------------------------
 				if(target.health<=0){
 					console.log(`${attacker.name} killed ${target.name} with her ${attacker.weapon}!`);
 					target.setTint(0xff0000);
@@ -72,68 +72,60 @@ export default class GameMaster {
 					target.setVelocityY(0);
 				} else {
 
-          //play damage animation ----------------------------------------------
+					//play damage animation ----------------------------------------------
 					target.setTint(0xff0000);
 					attacker.scene.time.addEvent({ delay: 400, callback: () => {target.setTint(0xffffff);}, callbackScope: this });
 					console.log(`${attacker.name} attacked ${target.name} for ${damageDealt} damage with their ${attacker.weapon}, ${target.name} has ${target.health}hp left`);
 				}
 			}
 
-    // if player dodges attack--------------------------------------------------
+			// if player dodges attack--------------------------------------------------
 		} else {
 			console.log(`${target.name} dodged ${attacker.name}'s attack`);
 		}
 	}
 
-  // chest opening**************************************************************
-  onOpen(player, chest){
+	// chest opening**************************************************************
+	onOpen(player, chest){
 
-    //if chest has already been opened, do nothing------------------------------
-    if (chest.open == true) {
-      return;
-    } else {
+		//if chest has already been opened, do nothing------------------------------
+		if (chest.open == true) {
+			return;
+		} else {
 
-      // add each item to player inventory--------------------------------------
-      console.log(chest.loot);
-      for (let i=0; chest.loot.length>i; i++){
-        player.addItem(chest.loot[i]);
-      }
-
-      // set chest to open------------------------------------------------------
-      chest.setTexture('open-chest');
-      chest.open = true;
-    }
-  }
-
-  //spawn methods***************************************************************
-
-	// spawn all the enemies------------------------------------------------------
-	spawn(scene, group, player, toSpawn, spawnSprite, spawnThreshold, spawnDistanceMin, spawnDistanceMax) {
-		if(group.countActive(true)<spawnThreshold) {
-      
-			//random room-------------------------------------------------------------
-			let randRoom = Math.floor(Math.random()*scene.dungeonMap.rooms.length);
-
-			// generate coordinates from room-----------------------------------------
-			let coordX=scene.dungeonMap.rooms[randRoom].x+Math.floor(Math.random()*((scene.dungeonMap.rooms[randRoom].w/scene.dungeonMap.w)-1))*scene.dungeonMap.w;
-			let coordY=scene.dungeonMap.rooms[randRoom].y+Math.floor(Math.random()*((scene.dungeonMap.rooms[randRoom].h/scene.dungeonMap.w)-1))*scene.dungeonMap.w;
-
-			// if out of bounds--------------------------------------------------------
-			if (coordX <= 0 || coordY <= 0 || coordX >= (scene.dungeonMap.cols*scene.dungeonMap.w) || coordY >= (scene.dungeonMap.cols*scene.dungeonMap.w)){
-				return;
-
-				//if too close----------------------------------------------------------
-			} else if(Math.abs(coordX-player.x)<spawnDistanceMin || Math.abs(coordY-player.y)<spawnDistanceMin){
-				return;
-
-				//if everything is ok, spawn mobs---------------------------------------
-			}	else {
-				toSpawn = group.create(coordX, coordY, spawnSprite);
+			// add each item to player inventory--------------------------------------
+			console.log(chest.loot);
+			for (let i=0; chest.loot.length>i; i++){
+				player.addItem(chest.loot[i]);
 			}
+
+			// set chest to open------------------------------------------------------
+			chest.setTexture('open-chest');
+			chest.open = true;
 		}
 	}
 
-  //generate traps -------------------------------------------------------------
+	//spawn methods***************************************************************
+
+	// spawn all the enemies------------------------------------------------------
+	spawn(scene, group, player, toSpawn, spawnSprite, spawnDistanceMin, spawnDistanceMax) {
+		//random room-------------------------------------------------------------
+		let randRoom = Math.floor(Math.random()*scene.dungeonMap.rooms.length);
+
+		// generate coordinates from room-----------------------------------------
+		let coordX=scene.dungeonMap.rooms[randRoom].x+Math.floor(Math.random()*((scene.dungeonMap.rooms[randRoom].w/scene.dungeonMap.w)-1))*scene.dungeonMap.w;
+		let coordY=scene.dungeonMap.rooms[randRoom].y+Math.floor(Math.random()*((scene.dungeonMap.rooms[randRoom].h/scene.dungeonMap.w)-1))*scene.dungeonMap.w;
+		// if out of bounds--------------------------------------------------------
+		if(Math.abs(coordX-player.x)<spawnDistanceMin || Math.abs(coordY-player.y)<spawnDistanceMin){
+			return;
+
+			//if everything is ok, spawn mobs---------------------------------------
+		}	else {
+			toSpawn = group.create(coordX, coordY, spawnSprite);
+		}
+	}
+
+	//generate traps -------------------------------------------------------------
 	trapGeneration(scene, spawnThreshold){
 
 		while (scene.traps.countActive(true)<spawnThreshold) {
@@ -152,7 +144,7 @@ export default class GameMaster {
 
 			// set trap properties----------------------------------------------------
 			let randomTrap = Math.floor(Math.random()*(scene.trapList.trap.length-1));
-      scene.trap.name = scene.trapList.trap[randomTrap].name;
+			scene.trap.name = scene.trapList.trap[randomTrap].name;
 			scene.trap.weapon = scene.trapList.trap[randomTrap].name;
 			scene.trap.combat = scene.trapList.trap[randomTrap].trigger;
 			scene.trap.damage = scene.trapList.trap[randomTrap].damage;
@@ -161,7 +153,7 @@ export default class GameMaster {
 			scene.trap.setImmovable(true);
 		}
 	}
-  //generate chests ------------------------------------------------------------
+	//generate chests ------------------------------------------------------------
 	chestGeneration(scene, spawnThreshold){
 		while (scene.chests.countActive(true)<spawnThreshold) {
 			//generate on a random room-----------------------------------------------
@@ -173,17 +165,17 @@ export default class GameMaster {
 			let randomWall = Math.floor(Math.random()*3);
 			switch (randomWall) {
 				case 0:
-					coordX = scene.dungeonMap.rooms[randRoom].x;
-					break;
+				coordX = scene.dungeonMap.rooms[randRoom].x;
+				break;
 				case 1:
-					coordY = scene.dungeonMap.rooms[randRoom].y;
-					break;
+				coordY = scene.dungeonMap.rooms[randRoom].y;
+				break;
 				case 2:
-					coordX = ((scene.dungeonMap.rooms[randRoom].w/scene.dungeonMap.w)-1)*scene.dungeonMap.w;
-					break;
+				coordX = scene.dungeonMap.rooms[randRoom].x+scene.dungeonMap.rooms[randRoom].w-scene.dungeonMap.w;
+				break;
 				case 3:
-					coordY = ((scene.dungeonMap.rooms[randRoom].h/scene.dungeonMap.w)-1)*scene.dungeonMap.h;
-					break;
+				coordY = scene.dungeonMap.rooms[randRoom].y+scene.dungeonMap.rooms[randRoom].h-scene.dungeonMap.w;
+				break;
 			}
 
 			// add to physics group-----------------------------------------------------

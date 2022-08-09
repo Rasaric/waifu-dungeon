@@ -25,6 +25,7 @@ export default class PreLoader extends Phaser.Scene {
 		this.load.image('trap', 'images/trap.png');
 		this.load.image('chest', 'images/chest.png');
 		this.load.image('open-chest', 'images/open-chest.png');
+		this.load.image('bare hands', 'images/bare-hands.png')
 
 		//JSON data ****************************************************************
 		this.load.json('loot', 'json/lootList.json');
