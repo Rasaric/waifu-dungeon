@@ -16,7 +16,7 @@ export default class GameMaster {
 
 	//attack----------------------------------------------------------------------
 	onFight(target, attacker){
-		//prevent attack spamming
+		//prevent attack spamming, disble traps-------------------------------------
 		if (attacker.cooldown==true || attacker.triggered==true) {
 			return;
 		}	else {
@@ -25,7 +25,6 @@ export default class GameMaster {
         attacker.scene.time.addEvent({ delay: attacker.attackCooldown, callback: () => {attacker.cooldown=false; console.log(attacker.name + ' can attack again');}, callbackScope: this });
       } else {
       attacker.triggered = true;
-
       }
     }
 
@@ -33,15 +32,15 @@ export default class GameMaster {
 		target.isKnockedback = true;
 		target.setVelocity(0);
 
-		// calculate angle
+		// calculate angle----------------------------------------------------------
 		let xAngle = (target.x-attacker.x)*attacker.knockbackSpeed;
 		let yAngle = (target.y-attacker.y)*attacker.knockbackSpeed;
 
-		// set speed character is knocked back
+		// set speed character is knocked back--------------------------------------
 		target.setVelocityY(yAngle);
 		target.setVelocityX(xAngle);
 
-		// after a moment, return to static
+		// after a moment, return to static-----------------------------------------
 		attacker.scene.time.addEvent({ delay: 100, callback:  () => {target.isKnockedback = false;}, callbackScope: this });
 
 		//roll for attack, defense and damage---------------------------------------
@@ -49,13 +48,22 @@ export default class GameMaster {
 		let defRoll = Math.floor(Math.random()*10)+target.dodge;
 		let damageRoll = Math.floor(Math.random()*attacker.damage);
 
-		//check values and resolve combat outcome
+		//check values and resolve combat outcome-----------------------------------
+
+    //compare attack roll to defense roll
 		if (atkRoll>defRoll) {
+
+      //calculate damage dealt--------------------------------------------------
 			let damageDealt = damageRoll-target.armor;
 			if (damageDealt<=0) {
+
+        // if armor absorbs all damage------------------------------------------
 				console.log(`${attacker.name} barely glanced ${target.name}'s ${target.armorName}`);
 			}	else {
+        // deal damage to health------------------------------------------------
 				target.health = target.health-damageDealt;
+
+        // if player dies ------------------------------------------------------
 				if(target.health<=0){
 					console.log(`${attacker.name} killed ${target.name} with her ${attacker.weapon}!`);
 					target.setTint(0xff0000);
@@ -63,11 +71,15 @@ export default class GameMaster {
 					target.setVelocityX(0);
 					target.setVelocityY(0);
 				} else {
+
+          //play damage animation ----------------------------------------------
 					target.setTint(0xff0000);
 					attacker.scene.time.addEvent({ delay: 400, callback: () => {target.setTint(0xffffff);}, callbackScope: this });
 					console.log(`${attacker.name} attacked ${target.name} for ${damageDealt} damage with their ${attacker.weapon}, ${target.name} has ${target.health}hp left`);
 				}
 			}
+
+    // if player dodges attack--------------------------------------------------
 		} else {
 			console.log(`${target.name} dodged ${attacker.name}'s attack`);
 		}
@@ -75,15 +87,18 @@ export default class GameMaster {
 
   // chest opening**************************************************************
   onOpen(player, chest){
+
     //if chest has already been opened, do nothing------------------------------
     if (chest.open == true) {
       return;
     } else {
+
       // add each item to player inventory--------------------------------------
       console.log(chest.loot);
       for (let i=0; chest.loot.length>i; i++){
         player.addItem(chest.loot[i]);
       }
+
       // set chest to open------------------------------------------------------
       chest.setTexture('open-chest');
       chest.open = true;
@@ -95,6 +110,7 @@ export default class GameMaster {
 	// spawn all the enemies------------------------------------------------------
 	spawn(scene, group, player, toSpawn, spawnSprite, spawnThreshold, spawnDistanceMin, spawnDistanceMax) {
 		if(group.countActive(true)<spawnThreshold) {
+      
 			//random room-------------------------------------------------------------
 			let randRoom = Math.floor(Math.random()*scene.dungeonMap.rooms.length);
 
@@ -121,8 +137,6 @@ export default class GameMaster {
 	trapGeneration(scene, spawnThreshold){
 
 		while (scene.traps.countActive(true)<spawnThreshold) {
-			//let trapId = Math.round(Math.random()*trapList.length);
-			// let texture = traplist[trapId].texture;
 			let texture = "trap";
 			// generate a trap in a random cell in the world--------------------------
 			let randCell = Math.round(Math.random()*scene.dungeonMap.spawnCells.length);

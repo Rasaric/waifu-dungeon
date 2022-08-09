@@ -50,8 +50,8 @@ export default class Character extends BaseCharacter {
 				player.setVelocityY(600);
 			}
 
-			//interaction---------------------------------------------------------------
-			//attack
+			//interaction*************************************************************
+			//attack------------------------------------------------------------------
 			if(Phaser.Input.Keyboard.JustDown(space)){
 				if (player.cooldown==true) {
 					return;
@@ -61,7 +61,7 @@ export default class Character extends BaseCharacter {
 					player.scene.scene.time.addEvent({ delay: 1000, callback: () => {player.cooldown=false}, callbackScope: this });
 				}
 			}
-			//open inventory
+			//open inventory----------------------------------------------------------
 			if(Phaser.Input.Keyboard.JustDown(keys.E)){
 				if (this.inventory.length == 0) {
 					console.log('broke ass nigga got nothin');
@@ -77,7 +77,7 @@ export default class Character extends BaseCharacter {
 		}
 
 	}
-	// add item to inventory------------------------------------------------------
+	// add item to inventory******************************************************
 	addItem(item){
 		this.inventory.push(item);
 		console.log(`player obtained ${item.name}`);

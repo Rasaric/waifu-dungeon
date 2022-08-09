@@ -32,7 +32,7 @@ export default class Game extends Phaser.Scene {
   //create**********************************************************************
   create() {
     // create a Game Master-----------------------------------------------------
-
+    this.gameMaster = new GameMaster(this);
     //load JSON data -----------------------------------------------------------
     this.lootList = this.cache.json.get('loot');
     this.trapList = this.cache.json.get('traps');
@@ -47,7 +47,7 @@ export default class Game extends Phaser.Scene {
         this.lootList.loot[i].rarity--
       }
     }
-    this.gameMaster = new GameMaster(this);
+
     //populate keys-------------------------------------------------------------
     this.keys = this.input.keyboard.addKeys("W,A,S,D,E,F");
     this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
@@ -65,7 +65,7 @@ export default class Game extends Phaser.Scene {
     //import player sprite------------------------------------------------------
     this.player = new Character(this, coordX, coordY, 'player', 64, 64, 'bare hands', 'nude body', 10, 1000);
 
-    // //set camera to follow character
+    // //set camera to follow character-----------------------------------------
     this.cameras.main.startFollow(this.player, true);
 
     // //single grunt for testing
@@ -89,7 +89,7 @@ export default class Game extends Phaser.Scene {
     this.physics.add.overlap(this.player, this.traps, this.gameMaster.onFight, null, this);
     this.physics.add.overlap(this.player, this.chests, this.gameMaster.onOpen, null, this);
 
-    // player properties
+    // map collisions ----------------------------------------------------------
     this.physics.add.collider(this.player, this.walls);
     this.physics.add.collider(this.grunts, this.walls);
 
