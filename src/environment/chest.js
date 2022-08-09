@@ -27,7 +27,9 @@ export default class Chest extends Phaser.Physics.Arcade.Sprite {
 		//draw an amount of loot from deck------------------------------------------
 		let i = 0
 		while (i<lootAmount){
-			let lootIndex = Math.round(Math.random()*scene.lootDeck.length);
+			let lootIndex = Math.floor(Math.random()*scene.lootDeck.length);
+			console.log("index: " + lootIndex);
+			console.log("length: " + scene.lootDeck.length);
 			scene.lootDeck[lootIndex].onDraw(scene, scene.lootDeck[lootIndex]);
 			i++
 		}

@@ -9,7 +9,7 @@ Enemy Constructor - Item
 //required----------------------------------------------------------------------
 import Phaser from 'phaser'
 export default class Item {
-  constructor(name, url, combat, dodge, damage, armor, flavor) {
+  constructor(name, url, combat, dodge, damage, armor, flavor, rarity) {
     this.name = name
     this.url = url
     this.combat = combat
@@ -20,10 +20,6 @@ export default class Item {
     this.rarity = rarity
   }
   onDraw(scene, card){
-    card.rarity--
-    if (card.rarity === 0){
-      scene.lootDeck.splice(card, 1);
-      console.log(scene.lootDeck);
-    }
+    scene.lootDeck.splice(card.name, 1);
   }
 }

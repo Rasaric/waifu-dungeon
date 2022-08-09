@@ -14,7 +14,7 @@ import Soldier from '../enemies/soldier'
 import Boss from '../enemies/boss'
 //enviroment--------------------------------------------------------------------
 import Trap from '../environment/trap'
-import Item from '../enviroment/item'
+import Item from '../environment/item'
 import Chest from '../environment/chest'
 //map---------------------------------------------------------------------------
 import DungeonMap from '../map/map'
@@ -35,12 +35,13 @@ export default class Game extends Phaser.Scene {
 
     // create item deck---------------------------------------------------------
     this.lootDeck = [];
-    for (i = 0; this.lootList.length > i; i++) {
-      this.loot = new Item (this.lootList[i].name, this.lootList[i].url, this.lootList[i].combat, this.lootList[i].dodge, this.lootList[i].damage, this.lootList[i].armor, this.lootList[i].flavor);
-      this.lootDeck.push(this.loot);
+    for (let i = 0; this.lootList.loot.length > i; i++) {
+      while (this.lootList.loot[i].rarity>0){
+        this.loot = new Item (this.lootList.loot[i].name, this.lootList.loot[i].url, this.lootList.loot[i].combat, this.lootList.loot[i].dodge, this.lootList.loot[i].damage, this.lootList.loot[i].armor, this.lootList.loot[i].flavor);
+        this.lootDeck.push(this.loot);
+        this.lootList.loot[i].rarity--
+      }
     }
-    console.log(lootDeck);
-
 
     //populate keys-------------------------------------------------------------
     this.keys = this.input.keyboard.addKeys("W,A,S,D,E,F");

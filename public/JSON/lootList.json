@@ -7,7 +7,7 @@
             "dodge": 0,
             "damage": 4,
             "armor": 0,
-            "rarity": 1,
+            "rarity": 2,
             "flavor": "God made man, Sam Colt made men equal"
 
         },
@@ -18,7 +18,7 @@
             "dodge": 2,
             "damage": 0,
             "armor": 1,
-            "rarity": 1,
+            "rarity": 4,
             "flavor": "perfectly clean and comfy"
 
         },
@@ -29,7 +29,7 @@
             "dodge": 2,
             "damage": 0,
             "armor": 1,
-            "rarity": 1,
+            "rarity": 4,
             "flavor": "it perfectly fits your waifu's soft, perky boobs"
 
         },
@@ -51,7 +51,7 @@
             "dodge": 0,
             "damage": 2,
             "armor": 0,
-            "rarity": 1,
+            "rarity": 2,
             "flavor": "for all kinds of offense"
 
         },
@@ -62,7 +62,7 @@
             "dodge": 0,
             "damage": 5,
             "armor": 0,
-            "rarity": 1,
+            "rarity": 3,
             "flavor": "an elegant weapon, from an uncivilized age"
 
         },
@@ -73,7 +73,7 @@
             "dodge": 1,
             "damage": 5,
             "armor": 0,
-            "rarity": 1,
+            "rarity": 2,
             "flavor": "now you look dangerous AND cool",
             "attackCooldown": -200
 
@@ -85,7 +85,7 @@
             "dodge": 1,
             "damage": 5,
             "armor": 0,
-            "rarity": 1,
+            "rarity": 2,
             "flavor": "why would you use them all at once!? just grab one!"
 
         },
@@ -96,7 +96,7 @@
             "dodge": 1,
             "damage": 3,
             "armor": 0,
-            "rarity": 1,
+            "rarity": 2,
             "flavor": "will keep most enemies away, except lesbians"
 
         },
@@ -107,7 +107,7 @@
             "dodge": -1,
             "damage": 6,
             "armor": 0,
-            "rarity": 1,
+            "rarity": 2,
             "flavor": "Big, thick, long and hard. just as she likes it"
 
         },
@@ -118,7 +118,7 @@
             "dodge": 1,
             "damage": 4,
             "armor": 0,
-            "rarity": 1,
+            "rarity": 3,
             "flavor": "like a gun, but not a gun"
 
         },
@@ -127,7 +127,7 @@
             "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Unico_Anello.png/1200px-Unico_Anello.png",
             "combat": 0,
             "dodge": 5,
-            "damage": 0,
+            "damage": -4,
             "armor": 0,
             "rarity": 1,
             "flavor": "One Ring to rule them all, One Ring to find them, One Ring to bring them all, and in the darkness bind them. DISCLAIMER: not a cock ring."
@@ -140,7 +140,7 @@
             "dodge": -1,
             "damage": 0,
             "armor": 4,
-            "rarity": 1,
+            "rarity": 3,
             "flavor": "will keep one of your waifu's most vulnerable parts protected, but restricts her movement"
 
         },
@@ -151,7 +151,7 @@
             "dodge": 2,
             "damage": 0,
             "armor": 1,
-            "rarity": 1,
+            "rarity": 2,
             "flavor": "almost like wearing nothing, surprisingly lewder than that."
 
         },
@@ -162,7 +162,7 @@
             "dodge": 1,
             "damage": 0,
             "armor": 1,
-            "rarity": 1,
+            "rarity": 3,
             "flavor": "*does not replace a waifu's hearing. may flicker from time to time, nya"
 
         },
@@ -225,8 +225,8 @@
             "name": "Powered Armor",
             "url": "https://i.pinimg.com/originals/93/ac/e6/93ace6e8714e0d391c361dc31298e723.jpg",
             "combat": 2,
-            "dodge": 3,
-            "damage": 0,
+            "dodge": -3,
+            "damage": 3,
             "armor": 5,
             "rarity": 1,
             "flavor": "unbelievably fast, this armor will keep your waifu safe from harm."
@@ -239,7 +239,7 @@
             "dodge": 1,
             "damage": 0,
             "armor": -2,
-            "rarity": 1,
+            "rarity": 2,
             "flavor": "contrary to what the name implies, this belt will make your waifu lewder, and more likely to be seduced by anyone willing to unlock it. also gives a small defense bonus."
 
         },
@@ -250,7 +250,7 @@
             "dodge": 2,
             "damage": 0,
             "armor": 0,
-            "rarity": 1,
+            "rarity": 3,
             "flavor": "Helps your waifu see attacks coming, and she looks very cute in them."
 
         },
@@ -261,7 +261,7 @@
             "dodge": 0,
             "damage": 3,
             "armor": 0,
-            "rarity": 1,
+            "rarity": 3,
             "flavor": "great for combat, amazing for scratching, terrible for more intimate stuff"
 
         },
@@ -272,7 +272,7 @@
             "dodge": 0,
             "damage": 3,
             "armor": 0,
-            "rarity": 1,
+            "rarity": 2,
             "flavor": "just a tad thicker than what she is used to. but that won't stop her"
 
         },
@@ -283,7 +283,7 @@
             "dodge": 3,
             "damage": 0,
             "armor": 0,
-            "rarity": 1,
+            "rarity": 4,
             "flavor": "CUTE! *CUUUUTE!*"
 
         },
@@ -294,7 +294,7 @@
             "dodge": 2,
             "damage": 0,
             "armor": 0,
-            "rarity": 1,
+            "rarity": 2,
             "flavor": "gives a solid combat advantage, and enemies are less likely to aproach you due to the smell."
 
         },
@@ -305,7 +305,7 @@
             "dodge": -1,
             "damage": 0,
             "armor": 0,
-            "rarity": 1,
+            "rarity": 4,
             "flavor": "she's ready to wear this once and never again"
 
         },
@@ -327,7 +327,7 @@
             "dodge": 0,
             "damage": 0,
             "armor": 0,
-            "rarity": 30,
+            "rarity": 4,
             "flavor": "just a good ol' stick"
 
         },
@@ -338,7 +338,7 @@
             "dodge": 0,
             "damage": 0,
             "armor": 0,
-            "rarity": 1,
+            "rarity": 4,
             "flavor": "Now you mean business"
 
         },
@@ -360,7 +360,7 @@
             "dodge": 0,
             "damage": 0,
             "armor": 2,
-            "rarity": 1,
+            "rarity": 3,
             "flavor": "dangerously cute"
 
         },
@@ -371,7 +371,7 @@
             "dodge": 2,
             "damage": 0,
             "armor": 0,
-            "rarity": 1,
+            "rarity": 4,
             "flavor": "you better run, better run, faster than their bullets"
 
         },
@@ -382,7 +382,7 @@
             "dodge": 3,
             "damage": 0,
             "armor": 0,
-            "rarity": 1,
+            "rarity": 2,
             "flavor": "Increases speed greatly. not as solid as a full exosuit"
 
         },
@@ -393,7 +393,7 @@
           "dodge": 0,
           "damage": 5,
           "armor": 0,
-          "rarity": 1,
+          "rarity": 3,
           "flavor": "Excuse me, I must persue an inquiry"
 
         },
@@ -404,7 +404,7 @@
           "dodge": 0,
           "damage": 3,
           "armor": 0,
-          "rarity": 1,
+          "rarity": 3,
           "flavor": "it good"
 
         },
@@ -415,13 +415,13 @@
           "dodge": 0,
           "damage": 1,
           "armor": 0,
-          "rarity": 1,
+          "rarity": 3,
           "flavor": "now with flesh-like texture!"
         },
         {
           "name": "Lego Brick",
           "url": "",
-          "combat": 0,
+          "combat": 4,
           "dodge": 1,
           "damage": 1,
           "armor": 0,
