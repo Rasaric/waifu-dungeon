@@ -6,7 +6,7 @@
             "combat": 3,
             "hp": 2,
             "dodge": 0,
-            "flavor": "just the run of the mill, basic goblin",
+            "flavor": "just the run of the mill, basic goblin"
         },
         {
             "name": "Goblin Boss",
@@ -14,7 +14,7 @@
             "combat": 4,
             "hp": 3,
             "dodge": 0,
-            "flavor": "larger goblin",
+            "flavor": "larger goblin"
         },
         {
             "name": "Hobgoblin",
@@ -22,7 +22,7 @@
             "combat": 4,
             "hp": 4,
             "dodge": 1,
-            "flavor": "Not actually a goblin, but a very ugly person",
+            "flavor": "Not actually a goblin, but a very ugly person"
         },
         {
             "name": "pengu",
@@ -30,7 +30,7 @@
             "combat": 0,
             "hp": 1,
             "dodge": 0,
-            "flavor": "the nerdiest princess, and the least threatening enemy",
+            "flavor": "the nerdiest princess, and the least threatening enemy"
         },
         {
             "name": "Orc",
@@ -38,7 +38,7 @@
             "combat": 1,
             "hp": 4,
             "dodge": 0,
-            "flavor": "big, dumb, and ugly... like you!",
+            "flavor": "big, dumb, and ugly... like you!"
         },
         {
             "name": "Kobold",
@@ -46,7 +46,7 @@
             "combat": 0,
             "hp": 1,
             "dodge": 2,
-            "flavor": "tiny dragon that wants to steal your treasure, or your girl.",
+            "flavor": "tiny dragon that wants to steal your treasure, or your girl."
         },
         {
             "name": "Skeleton",
@@ -54,7 +54,7 @@
             "combat": 0,
             "hp": 1,
             "dodge": 3,
-            "flavor": "RELASE MY BRETHEREN FROM YOUR MEAT PRISON",
+            "flavor": "RELASE MY BRETHEREN FROM YOUR MEAT PRISON"
         },
         {
             "name": "Dark Mage",
@@ -62,7 +62,7 @@
             "combat": 3,
             "hp": 2,
             "dodge": 3,
-            "flavor": "a horny old man that sadly did not prepare any charm spells",
+            "flavor": "a horny old man that sadly did not prepare any charm spells"
         },
         {
             "name": "Ugly bastard",
@@ -70,7 +70,7 @@
             "combat": 5,
             "hp": 10,
             "dodge": 1,
-            "flavor": "The waifu slayer, the NTRist, the Hentai ruiner, the loli widener.",
+            "flavor": "The waifu slayer, the NTRist, the Hentai ruiner, the loli widener."
         },
     ]
 }

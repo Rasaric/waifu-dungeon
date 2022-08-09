@@ -13,6 +13,7 @@ import Grunt from '../enemies/grunt'
 import Soldier from '../enemies/soldier'
 import Boss from '../enemies/boss'
 //enviroment--------------------------------------------------------------------
+import GameMaster from '../environment/gameMaster'
 import Trap from '../environment/trap'
 import Item from '../environment/item'
 import Chest from '../environment/chest'
@@ -30,19 +31,23 @@ export default class Game extends Phaser.Scene {
   }
   //create**********************************************************************
   create() {
+    // create a Game Master-----------------------------------------------------
+
     //load JSON data -----------------------------------------------------------
     this.lootList = this.cache.json.get('loot');
+    this.trapList = this.cache.json.get('traps');
 
     // create item deck---------------------------------------------------------
     this.lootDeck = [];
     for (let i = 0; this.lootList.loot.length > i; i++) {
+      // create copies of items based on rarity---------------------------------
       while (this.lootList.loot[i].rarity>0){
         this.loot = new Item (this.lootList.loot[i].name, this.lootList.loot[i].url, this.lootList.loot[i].combat, this.lootList.loot[i].dodge, this.lootList.loot[i].damage, this.lootList.loot[i].armor, this.lootList.loot[i].flavor);
         this.lootDeck.push(this.loot);
         this.lootList.loot[i].rarity--
       }
     }
-
+    this.gameMaster = new GameMaster(this);
     //populate keys-------------------------------------------------------------
     this.keys = this.input.keyboard.addKeys("W,A,S,D,E,F");
     this.spacebar = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
@@ -59,8 +64,7 @@ export default class Game extends Phaser.Scene {
 
     //import player sprite------------------------------------------------------
     this.player = new Character(this, coordX, coordY, 'player', 64, 64, 'bare hands', 'nude body', 10, 1000);
-    // player properties
-    this.physics.add.collider(this.player, this.walls);
+
     // //set camera to follow character
     this.cameras.main.startFollow(this.player, true);
 
@@ -74,8 +78,20 @@ export default class Game extends Phaser.Scene {
     // enviroment --------------------------------------------------------------
     this.traps = this.physics.add.group({ classType: Trap });
     this.chests = this.physics.add.group({ classType: Chest });
-    this.player.trapGeneration(this, 50);
-    this.player.chestGeneration(this, 30);
+    this.gameMaster.trapGeneration(this, 50);
+    this.gameMaster.chestGeneration(this, 30);
+
+    // collisions --------------------------------------------------------------
+    this.physics.add.collider(this.player, this.grunts, this.gameMaster.onFight, null, this);
+    this.physics.add.collider(this.player, this.soldiers, this.gameMaster.onFight, null, this);
+    this.physics.add.collider(this.player, this.bosses, this.gameMaster.onFight, null, this);
+
+    this.physics.add.overlap(this.player, this.traps, this.gameMaster.onFight, null, this);
+    this.physics.add.overlap(this.player, this.chests, this.gameMaster.onOpen, null, this);
+
+    // player properties
+    this.physics.add.collider(this.player, this.walls);
+    this.physics.add.collider(this.grunts, this.walls);
 
 
   }
@@ -85,8 +101,9 @@ export default class Game extends Phaser.Scene {
     this.player.controls(this.keys, this.spacebar, this.player);
     //spawn check --------------------------------------------------------------
 
-    this.player.spawn(this, this.grunts, this.player, this.grunt, 'grunt', 20, 300, 2000);
-    this.player.spawn(this, this.soldiers, this.player, this.soldier, 'grunt', 10, 500, 3000);
-    this.player.spawn(this, this.bosses, this.player, this.boss, 'grunt', 1, 1500, 4000);
+    this.gameMaster.spawn(this, this.grunts, this.player, this.grunt, 'grunt', 20, 300, 2000);
+    this.gameMaster.spawn(this, this.soldiers, this.player, this.soldier, 'grunt', 10, 500, 3000);
+    this.gameMaster.spawn(this, this.bosses, this.player, this.boss, 'grunt', 1, 1500, 4000);
+
   }
 }

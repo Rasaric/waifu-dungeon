@@ -28,6 +28,7 @@ export default class PreLoader extends Phaser.Scene {
 
 		//JSON data ****************************************************************
 		this.load.json('loot', 'json/lootList.json');
+		this.load.json('traps', 'json/trapList.json');
     }
 
     create() {

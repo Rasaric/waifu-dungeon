@@ -18,9 +18,7 @@ export default class Trap extends BaseCharacter {
 		this.displayHeight = 64;
 		this.weapon = weapon;
 		this.knockbackSpeed = 10;
-		this.attackCooldown = 5000;
+		//this.flavor = flavor;
+		this.triggered = false;
 	}
-
-	/*Trap Methods**************************************************************/
-
 }
