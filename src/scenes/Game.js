@@ -124,9 +124,5 @@ export default class Game extends Phaser.Scene {
 
     //update inputs-------------------------------------------------------------
     this.player.controls(this.keys, this.spacebar, this);
-    //spawn check --------------------------------------------------------------
-
-
-
   }
 }

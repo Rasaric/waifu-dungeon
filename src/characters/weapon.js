@@ -21,8 +21,7 @@ export default class Weapon extends Phaser.Physics.Arcade.Sprite {
 		this.rangeW = 64;
 		this.rangeH = 256;
 		this.name = "weapon";
+		this.attackCooldown = 200;
 	}
 	/*Weapon Methods*************************************************************/
-
-
 }
