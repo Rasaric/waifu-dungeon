@@ -22,7 +22,6 @@ export default class Character extends BaseCharacter {
 		this.health = 10;
 		this.dodge = 1;
 		this.armor = 1;
-		this.equipped = "bare hands"
 		this.weapon = "bare hands"
 		this.setDepth(3);
 		this.facing = "up";
@@ -64,6 +63,7 @@ export default class Character extends BaseCharacter {
 			if(Phaser.Input.Keyboard.JustDown(space)){
 				let positionX = scene.player.x;
 				let positionY = scene.player.y;
+
 				switch (scene.player.facing) {
 					case "left": positionX = positionX-64;
 					scene.weapon.angle = 270;
