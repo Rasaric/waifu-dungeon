@@ -44,9 +44,9 @@ export default class GameMaster {
 		attacker.scene.time.addEvent({ delay: 100, callback:  () => {target.isKnockedback = false;}, callbackScope: this });
 
 		//roll for attack, defense and damage---------------------------------------
-		let atkRoll = Math.floor(Math.random()*10)+attacker.combat;
-		let defRoll = Math.floor(Math.random()*10)+target.dodge;
-		let damageRoll = Math.floor(Math.random()*attacker.damage);
+		let atkRoll = Math.round(Math.random()*10)+attacker.combat;
+		let defRoll = Math.round(Math.random()*10)+target.dodge;
+		let damageRoll = Math.round(Math.random()*attacker.damage);
 
 		//check values and resolve combat outcome-----------------------------------
 
