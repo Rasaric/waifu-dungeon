@@ -25,7 +25,7 @@ export default class BaseCharacter extends Phaser.Physics.Arcade.Sprite {
 		//basic attributes
 		this.name = texture;
 		//stats
-		this.health = 1;
+		this.health = 10;
 		this.combat = 5;
 		this.dodge = 1;
 		this.damage = 8;

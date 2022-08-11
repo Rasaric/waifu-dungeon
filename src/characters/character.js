@@ -26,8 +26,6 @@ export default class Character extends BaseCharacter {
 		this.armor = 1;
 		this.equipped = "bare hands"
 		this.weapon = "bare hands"
-		this.rangeW = 64
-		this.rangeH = 64
 		this.setDepth(3);
 
 	}

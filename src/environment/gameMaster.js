@@ -17,7 +17,7 @@ export default class GameMaster {
 	//attack----------------------------------------------------------------------
 	onFight(target, attacker){
 		//prevent attack spamming, disble traps-------------------------------------
-		if (attacker.cooldown==true || attacker.triggered==true) {
+		if (attacker.cooldown==true || attacker.triggered==true || attacker.active==false) {
 			return;
 		}	else {
 			if (typeof attacker.triggered=="undefined"){
@@ -131,7 +131,7 @@ export default class GameMaster {
 		while (scene.traps.countActive(true)<spawnThreshold) {
 			let texture = "trap";
 			// generate a trap in a random cell in the world--------------------------
-			let randCell = Math.round(Math.random()*scene.dungeonMap.spawnCells.length);
+			let randCell = Math.round(Math.random()*(scene.dungeonMap.spawnCells.length-1));
 			let xCoord = scene.dungeonMap.spawnCells[randCell].x;
 			let yCoord = scene.dungeonMap.spawnCells[randCell].y;
 

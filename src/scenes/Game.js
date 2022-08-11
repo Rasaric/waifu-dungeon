@@ -69,8 +69,7 @@ export default class Game extends Phaser.Scene {
     // //set camera to follow character-----------------------------------------
     this.cameras.main.startFollow(this.player, true);
 
-    //single grunt for testing
-    // this.grunt = new Grunt(this, coordX, coordY+100, 'grunt',64 , 64, 'rusty sword', 'tattered robes', 10);
+
 
     //enemies-------------------------------------------------------------------
     this.grunts = this.physics.add.group({ classType: Grunt });
@@ -80,16 +79,18 @@ export default class Game extends Phaser.Scene {
     this.traps = this.physics.add.group({ classType: Trap });
     this.chests = this.physics.add.group({ classType: Chest });
 
+    //single grunt for testing
+    this.grunt = this.grunts.create(coordX, coordY-200, 'grunt');
+
     //weapon properties --------------------------------------------------------
     this.weapons = this.physics.add.group({ classType: Weapon });
-    this.weapon = this.weapons.create(this.player.x, this.player.y-64, 'bare hands');
+    this.weapon = this.weapons.create(this.player.x, this.player.y, 'bare hands');
     this.weapon.displayWidth = 64;
     this.weapon.displayHeight = 64;
-    this.weapon.name = this.player.name;
+    this.weapon.name = this.player.weapon;
     this.weapon.setActive(false).setVisible(false);
     //this.weapon = new Weapon(this.player.scene, this.player.x, this.player.y-64, this.player.weapon);
     this.weapon.setImmovable(true);
-
     // generate enviroment assets ----------------------------------------------
     this.gameMaster.trapGeneration(this, 50);
     this.gameMaster.chestGeneration(this, 30);
@@ -110,7 +111,7 @@ export default class Game extends Phaser.Scene {
     this.physics.add.collider(this.bosses, this.walls);
 
     //player combat ------------------------------------------------------------
-    this.physics.add.collider(this.grunts, this.weapons, this.gameMaster.onFight, null, this);
+    this.physics.add.overlap(this.grunts, this.weapons, this.gameMaster.onFight, null, this);
     this.physics.add.overlap(this.soldiers, this.weapons, this.gameMaster.onFight, null, this);
     this.physics.add.overlap(this.bosses, this.weapons, this.gameMaster.onFight, null, this);
 
