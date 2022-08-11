@@ -15,15 +15,11 @@ export default class Weapon extends Phaser.Physics.Arcade.Sprite {
 		super(scene, x, y, texture);
 		//attributes****************************************************************
 		//basic attributes
-		this.combat = 1;
-		this.damage = 4;
-		this.knockbackSpeed = 5;
-		this.combat = 1;
-		this.dodge = 1;
+		this.combat = 2;
 		this.damage = 2;
-		this.armor = 1;
+		this.knockbackSpeed = 10;
 		this.rangeW = 64;
-		this.rangeH = 64;
+		this.rangeH = 256;
 		this.name = "weapon";
 	}
 	/*Weapon Methods*************************************************************/

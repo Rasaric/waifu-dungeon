@@ -69,8 +69,6 @@ export default class Game extends Phaser.Scene {
     // //set camera to follow character-----------------------------------------
     this.cameras.main.startFollow(this.player, true);
 
-
-
     //enemies-------------------------------------------------------------------
     this.grunts = this.physics.add.group({ classType: Grunt });
     this.soldiers = this.physics.add.group({ classType: Soldier });
@@ -80,7 +78,7 @@ export default class Game extends Phaser.Scene {
     this.chests = this.physics.add.group({ classType: Chest });
 
     //single grunt for testing
-    this.grunt = this.grunts.create(coordX, coordY-200, 'grunt');
+    // this.grunt = this.grunts.create(coordX, coordY-200, 'grunt');
 
     //weapon properties --------------------------------------------------------
     this.weapons = this.physics.add.group({ classType: Weapon });
@@ -89,12 +87,11 @@ export default class Game extends Phaser.Scene {
     this.weapon.displayHeight = 64;
     this.weapon.name = this.player.weapon;
     this.weapon.setActive(false).setVisible(false);
-    //this.weapon = new Weapon(this.player.scene, this.player.x, this.player.y-64, this.player.weapon);
     this.weapon.setImmovable(true);
-    // generate enviroment assets ----------------------------------------------
-    this.gameMaster.trapGeneration(this, 50);
-    this.gameMaster.chestGeneration(this, 30);
 
+    // generate enviroment assets ----------------------------------------------
+    this.gameMaster.trapGeneration(this, 20);
+    this.gameMaster.chestGeneration(this, 10);
 
     // collisions --------------------------------------------------------------
     this.physics.add.collider(this.player, this.grunts, this.gameMaster.onFight, null, this);

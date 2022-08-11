@@ -20,9 +20,7 @@ export default class Character extends BaseCharacter {
 
 		//stats
 		this.health = 10;
-		this.combat = 1;
 		this.dodge = 1;
-		this.damage = 4;
 		this.armor = 1;
 		this.equipped = "bare hands"
 		this.weapon = "bare hands"
