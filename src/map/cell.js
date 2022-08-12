@@ -30,7 +30,7 @@ export default class Cell extends Phaser.Physics.Arcade.Sprite{
     } else {
       // rooms cells------------------------------------------------------------
       scene.floor = scene.physics.add.sprite(this.x, this.y, 'tile');
-      dungeon.spawnCells.push(scene.floor);
+      scene.dungeonMap.spawnCells.push(scene.floor);
     }
   }
 
