@@ -20,6 +20,7 @@ import Chest from '../environment/chest'
 import Weapon from '../characters/weapon'
 //map---------------------------------------------------------------------------
 import DungeonMap from '../map/map'
+import Pathfinding from '../map/pathfinding'
 
 //initiate game instance********************************************************
 export default class Game extends Phaser.Scene {
@@ -57,6 +58,8 @@ export default class Game extends Phaser.Scene {
     this.dungeonMap = new DungeonMap(64, 100, 100, 10, 8, 5, 2);
     //dungW, dungRows, dungCols, dungAmount, dungSize, dungSizeMin, dungCorridorW
     this.dungeonMap.onGenerate(this);
+    this.pathfinder = new Pathfinding(this);
+    this.pathfinder.mapParse(this);
 
     // spawning the player------------------------------------------------------
     let randRoom = Math.floor(Math.random()*this.dungeonMap.rooms.length);
@@ -78,7 +81,7 @@ export default class Game extends Phaser.Scene {
     this.chests = this.physics.add.group({ classType: Chest });
 
     //single grunt for testing
-    // this.grunt = this.grunts.create(coordX, coordY-200, 'grunt');
+    //this.grunt = this.grunts.create(coordX, coordY-64, 'grunt');
 
     //weapon properties --------------------------------------------------------
     this.weapons = this.physics.add.group({ classType: Weapon });
@@ -90,8 +93,8 @@ export default class Game extends Phaser.Scene {
     this.weapon.setImmovable(true);
 
     // generate enviroment assets ----------------------------------------------
-    this.gameMaster.trapGeneration(this, 20);
-    this.gameMaster.chestGeneration(this, 10);
+    // this.gameMaster.trapGeneration(this, 20);
+    // this.gameMaster.chestGeneration(this, 10);
 
     // collisions --------------------------------------------------------------
     this.physics.add.collider(this.player, this.grunts, this.gameMaster.onFight, null, this);
@@ -116,13 +119,30 @@ export default class Game extends Phaser.Scene {
     while(this.grunts.countActive(true) < 20) {this.gameMaster.spawn(this, this.grunts, this.player, this.grunt, 'grunt', 300, 2000)};
     while(this.soldiers.countActive(true) < 10) {this.gameMaster.spawn(this, this.soldiers, this.player, this.soldier, 'grunt', 500, 3000)};
     while(this.bosses.countActive(true) < 1) {this.gameMaster.spawn(this, this.bosses, this.player, this.boss, 'grunt', 1500, 4000)};
-
-
   }
+
   //update game state***********************************************************
   update() {
 
     //update inputs-------------------------------------------------------------
     this.player.controls(this.keys, this.spacebar, this);
+    //this.grunt.fakePathfind(this.player, this.grunt);
+
+    // pathfinding--------------------------------------------------------------
+    for (var i=0; this.grunts.children.entries.length>i; i++){
+      this.grunts.children.entries[i].fakePathfind(this.player, this.grunts.children.entries[i]);
+    }
+    for (var i=0; this.soldiers.children.entries.length>i; i++){
+      this.soldiers.children.entries[i].fakePathfind(this.player, this.soldiers.children.entries[i]);
+    }
+    for (var i=0; this.bosses.children.entries.length>i; i++){
+      this.bosses.children.entries[i].fakePathfind(this.player, this.bosses.children.entries[i]);
+    }
+
+    // this.soldiers.children.forEach(this.soldier.fakePathfind(this.player, this.soldier), this);
+    // this.bosses.children.forEach(this.boss.fakePathfind(this.player, this.soldier), this);
+    //let destination = this.grunt.onPatrol(this, this.grunt);
+
+    // this.grunt.moveCharacter(this, destination);
   }
 }
