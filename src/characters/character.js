@@ -57,6 +57,10 @@ export default class Character extends BaseCharacter {
 				scene.player.setVelocityY(600);
 				scene.player.facing = "down";
 			}
+			if (scene.vision){
+	      scene.vision.x = scene.player.x;
+	      scene.vision.y = scene.player.y;
+	    }
 
 			//interaction*************************************************************
 			//attack------------------------------------------------------------------

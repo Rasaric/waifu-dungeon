@@ -18,6 +18,7 @@ import Trap from '../environment/trap'
 import Item from '../environment/item'
 import Chest from '../environment/chest'
 import Weapon from '../characters/weapon'
+import Vision from '../environment/vision'
 //map---------------------------------------------------------------------------
 import DungeonMap from '../map/map'
 import Pathfinding from '../map/pathfinding'
@@ -71,6 +72,10 @@ export default class Game extends Phaser.Scene {
 
     // //set camera to follow character-----------------------------------------
     this.cameras.main.startFollow(this.player, true);
+
+    //fog of war----------------------------------------------------------------
+    this.fog = new Vision(this);
+    this.fog.fogOfWar(this);
 
     //enemies-------------------------------------------------------------------
     this.grunts = this.physics.add.group({ classType: Grunt });
